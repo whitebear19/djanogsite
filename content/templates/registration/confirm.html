@@ -1,0 +1,156 @@
+
+{% extends 'authroot.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="login-sidebar bg-white">
+        <h2 class="font-weight-bold mb-4 text-center text-md-left">Verify your account</h2>
+        <form id="form_confirm"  method="POST">
+        {% csrf_token %}
+            <div class="form-group">                
+                <input type="text" name="code" maxlength="6" class="form-control required input_verify" placeholder="Enter verify code">
+                <p class="alert_both alert_txt">Invalid data. Please try again.</p>
+            </div>            
+            
+            <button type="button" class="btn btn-primary btn-block btn_verify font-weight-bold">Verify</button>
+
+            <div class="form-group mt-3 text-right">                
+                <button type="button" class="btn_transparent btn_resend_code">Resend</button>
+            </div>
+            <input type="hidden" value="" name="which">
+
+        </form>       
+    </div>    
+
+    <script>
+        
+        function verify()
+        {                       
+            var checkvalid = true;       
+            $(".required").each(function(){
+                if($(this).val() == "")
+                {                        
+                    $(this).addClass('alertborder');
+                    checkvalid = false;
+                }
+            });
+            
+                       
+            if(checkvalid)
+            {                    
+                $("#loading").css("display",'flex');
+                var data = $('#form_confirm').serialize();
+                $.ajax({
+                    url: "{% url 'account:verify_confirm' %}",
+                    method: 'POST', 
+                    type: 'json',
+                    data: data,           
+                    success: function (response) 
+                    {  
+                        $("#loading").css("display",'none');
+                        var data = response.results;         
+                                    
+                        if(!response.auth)
+                        {           
+                            location.reload()                   
+                        }
+                        else
+                        {                                
+                            if(data)
+                            {
+                                var cur_url = window.location.href.replace('confirm', 'dashboard');                       
+                                window.location.replace(cur_url);    
+                            }
+                            else
+                            {
+                                $(".alert_both").css('display','block');
+                            }
+                        }
+                    }
+                });
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        function resend()
+        {               
+            $("#loading").css("display",'flex');            
+            $.ajax({
+                url: "{% url 'account:verify_resend' %}",
+                method: 'GET', 
+                type: 'json',     
+                success: function (response) 
+                {  
+                    $("#loading").css("display",'none');
+                    var data = response.results;         
+                                
+                    if(!response.auth)
+                    {           
+                        location.reload()                   
+                    }
+                    else
+                    {                                                        
+                        if(data)
+                        {
+                            var which = '';
+                            if(response.which == "e")
+                            {
+                                which = "email";
+                            }
+                            else
+                            {
+                                which = "phone";
+                            }
+                            swal({
+                                title: "Successfully sent!",
+                                text: "We have sent verify code.Please check your "+which+" and verify your account.",                                               
+                                type: "success"
+                            }).then(function() {
+                                
+                            });
+                        }
+                        else
+                        {
+                            swal({
+                                title: "Somethin wrong!",
+                                text: "Please try again.",                                               
+                                type: "error"
+                            }).then(function() {
+                                location.reload();
+                            });
+                        }
+                    }
+                }
+            });           
+        }
+
+        $(document).ready(function(){
+            $(document).on('click','.alertborder',function(){                
+                $(this).removeClass('alertborder');
+            });
+            
+            $(document).on('click','.btn_verify',function()
+            {                     
+                verify();
+            });
+            
+            $(document).on('click','.btn_resend_code',function()
+            {                     
+                resend();
+            });
+
+            $(document).on('keyup','.input_verify',function(e){
+                if(e.which == 13) {
+                    verify();
+                }                
+            });
+            $(document).on('keyup','.alertborder',function(){
+                $(this).removeClass('alertborder');
+            });   
+                                    
+        });
+    </script>
+{% endblock %}

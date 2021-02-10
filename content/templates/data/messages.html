@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+{% load static %}
+    <main>
+        <div class="main-section">
+            <div class="container">
+                <div class="main-section-data">
+                    <div class="row">
+                        <div class="col-lg-9 pd-left-none pd-right-none no-pd">
+                            <div class="messages-sec">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-12 no-pdd">
+                                        <div class="msgs-list">
+                                            <div class="msg-title">
+                                                <div class="search-box">
+                                                    <form>
+                                                        <div class="d-md-flex">
+                                                            <input type="text" name="search"
+                                                                placeholder="Search keywords">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="uc-tabs-content animated fadeIn current">
+                                                <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+                                                    <li class="nav-item" data-id="chat_active">
+                                                        <a class="nav-link active" id="mange-tab" data-toggle="tab"
+                                                            href="#active" role="tab" aria-controls="home"
+                                                            aria-selected="true">Active</a>
+                                                    </li>
+                                                    <li class="nav-item" data-id="chat_history">
+                                                        <a class="nav-link" id="saved-tab" data-toggle="tab"
+                                                            href="#history" role="tab" aria-controls="profile"
+                                                            aria-selected="false">History</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content" id="myTabContent">
+                                                    <div class="tab-pane fade active show" id="active"
+                                                        role="tabpanel" aria-labelledby="mange-tab">
+                                                        <div class="messages-list">
+                                                            <ul class="contact_list common_display chat_active">
+                                                                                                        
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="history" role="tabpanel"
+                                                        aria-labelledby="saved-tab">
+                                                        <div class="messages-list">
+                                                            <ul class="history_list common_display chat_history">
+                                                                                                                
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 col-md-12 pd-right-none pd-left-none">
+                                        <div class="main-conversation-box">
+                                            <div class="message-bar-head">
+                                                <div class="usr-msg-details">
+                                                    <div class="usr-ms-img">
+                                                        <img src="assets/images/s1.png" alt="">
+                                                    </div>
+                                                    <div class="usr-mg-info">
+                                                        <h3 class="chat_box_username_message"></h3>
+                                                        <p>Online</p>
+                                                    </div>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa fa-ellipsis-v"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <button class="dropdown-item" type="button">Delete</button>
+                                                        <button class="dropdown-item" type="button">Turn Off</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="messages-line custom_scroll chat_item_view_body_message chat_item_content_message">
+                                                                                                    
+                                            </div>
+                                            <div class="message-send-area">
+                                                
+                                                <div class="mf-field d-flex align-items-end">
+                                                    <textarea type="text" name="message"
+                                                        placeholder="Type a message here" class="form-control send_message_global send_message_global_message"
+                                                        style="margin-top: 0px; margin-bottom: 0px; min-height: 43px; height:43px;"></textarea>
+                                                    <button type="button" class="btn_send">Send</button>
+                                                </div>
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 pd-right-none no-pd">
+                            <div class="right-sidebar">
+                               
+                            </div>
+                            <!--right-sidebar end-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>           
+    <script>
+        var user_avatar = '';
+        var user_name = '';
+               
+        function init_page()
+        {
+            $("#page_where").val('message');
+            $(".chat_item_view").html("");
+            $(".contact_list_global").html("");
+        }
+        $(document).ready(function(){
+            init_page();   
+            $(document).on('click','.nav-item',function(){
+                var selected = $(this).data('id');
+                                
+                $('.send_message_global').val('');
+                if(selected=="chat_history")
+                {
+                    $('.send_message_global').prop('disabled', true);
+                }
+                else
+                {
+                    $('.send_message_global').prop('disabled', false);
+                }           
+                
+            });       
+        });
+    </script>
+{% endblock %}

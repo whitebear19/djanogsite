@@ -1,0 +1,712 @@
+header {    
+    position: fixed;
+    z-index: 9999;
+}
+
+main {    
+    margin-top: 55px;
+}
+.profile-section
+{
+    padding-top: 100px;
+}
+button{
+    outline: none!important;
+    box-shadow: none!important;
+}
+.m-show{
+    display: none;
+}
+/* auth_page */
+.process-comm{
+    position: fixed;
+    z-index: 9999;
+    width: 100%;    
+    height: 100vh;
+    background-color: rgb(243 243 243 / 44%);    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+.alertborder {
+    border-color: #ee0000!important;
+}
+
+.alert_txt {
+    color: #ee0000;
+    margin-top: 10px;
+    display: none;
+}
+.btn-sel-gender
+{
+    position: relative;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: Poppins-Regular;
+    font-size: 0.9rem;
+    padding: 6px 0px 6px 20px;
+    width: 100%;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    height: 38px;
+}
+.btn-sel-gender input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.btn-sel-gender input:checked ~ .checkround_user {
+    background-color: #40c229;
+    border-color: #32aa1d;
+    transition: 0.8s;
+}
+.checkround_user {
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    height: 15px;
+    width: 15px;
+    background-color: #dedede;
+    border-color: #d0d0d0;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 50%;
+}
+.radio_txt{
+    font-size: 14px;
+    line-height: 24px;
+    margin-left: 2px;
+    font-family: arial;
+}
+
+.btn_switch_email_phone
+{
+    background-color: transparent;
+    color: #357ebd;
+    border: none;
+    padding: 0px;
+    font-weight: 600;
+    transition: 0.5s;
+    outline: none!important;
+    box-shadow: none!important;
+}
+.btn_switch_email_phone:hover
+{
+    background-color: transparent;
+    color: #155892;
+    border: none;
+    padding: 0px;
+    font-weight: 600;
+}
+.form_warp_email{
+    
+}
+
+/* base_nav */
+
+.user-info img {
+    margin-right: 10px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+    border-radius: 100px;
+    width: 30px;
+    height: 30px;
+}
+
+.usr-pic>img {
+    background-color: #dedede;
+    max-height: 86px;
+    height: 86px;
+}
+nav {    
+    width: 55%;   
+}
+.user-account {    
+    width: 150px;    
+}
+.user-info a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 85px;
+    white-space: nowrap;
+}
+
+/* post_create */
+.btn_transparent{
+    border: none;
+    background-color: transparent;
+    outline: none!important;
+    box-shadow: none!important;
+}
+
+.user-detail .img_avatar {
+    width: 50px;
+    height: 50px;
+}
+
+.dropdown_custom_position {
+    left: -100px!important;
+    box-shadow: 0px 2px 7px 1px rgb(81 82 82 / 40%)!important;
+    width: 160px!important;
+}
+.dropdown_custom_position button{
+    font-size: 14px;
+}
+.dropdown_custom_position .dropdown-item{
+    padding:5px 10px!important;
+}
+
+
+
+.pos_rel{
+    position: relative;
+}
+
+
+.modal-header {
+    background-color: #00557d;
+    display: block !important;
+    color: white;
+    font-weight: 600;
+}
+.modal-body {
+    padding: 20px!important;
+}
+
+.suggestion-usd img{
+    width:35px;
+    height:35px;
+}
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;    
+}
+#viewFullAttach .modal-dialog {
+    max-width: 100%!important;
+    width: 100%!important;
+    margin: 0px!important;
+}
+#postMediaModal .modal-body {
+    padding: 0px!important;
+}
+.pf-gallery img {
+    width: 100%;
+    height: 55px;
+    max-height: 55px;
+    border-radius: 5px;
+}
+.user_no_avatar{
+    width: 50px;
+    height: 50px;
+    border: 1px solid #00557d;
+    background-color: #00557d;
+    display: inline-block;
+    border-radius: 25px;
+    line-height: 50px;
+    text-align: center;
+    color: white;
+}
+.user_no_avatar_40 {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #00557d;
+    background-color: #00557d;
+    display: inline-block;
+    border-radius: 25px;
+    line-height: 40px;
+    text-align: center;
+    color: white;
+}
+.btn_room_item{
+    cursor: pointer;
+}
+.user-info-contact{
+    float: left;
+    width: 100%;
+    padding: 13px 10px;
+    position: relative;
+    display: table-cell;
+    vertical-align: top;
+    width: 100%;
+    padding-left: 15px;
+}
+
+
+/* chat area */
+.chat_box_area {
+    position: fixed;
+    bottom: 0px;
+    max-width: 900px;
+    right: 290px;
+    height: 360px;
+    text-align: right;
+    z-index: 9999;
+}
+.chat_item_view {
+    width: 290px;
+    background: white;
+    box-shadow: 0px 0px 1px 1px rgb(125 162 193 / 35%);
+    margin-right: 5px;
+    display: inline-block;
+}
+.contact_list_global_header, .chat_item_view_header {
+    background-color: #00557d;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;    
+    height: 40px;
+    text-align: left;
+}
+.chat_item_view_body, .common_body_chat_contact {
+    height: 280px;
+    padding: 10px 5px;
+    overflow-y: scroll;
+}
+.chat_item_type_message {
+    border-top: 1px solid #dedede;
+}
+.chat_item_type_message textarea {
+    width: 100%;
+    height: 35px;
+    padding: 5px 35px 5px 10px;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+.btn_global_chat {
+    border: none;    
+    box-shadow: none;
+    outline: none!important;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 20px;
+    background-color: white;
+    width: 40px;
+    height: 35px;
+}
+.conversation-box {    
+    width: 280px;
+}
+.btn_close_chat_box {
+    position: absolute;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    outline: none!important;
+    color: white;
+    top: 10px;
+    right: 10px;
+}
+.custom_scroll::-webkit-scrollbar {
+    width: 5px;    
+    cursor: pointer;           
+  }
+.custom_scroll::-webkit-scrollbar-track {
+background: #dedede;        
+}
+.custom_scroll::-webkit-scrollbar-thumb {
+background-color: #3f3f3f;    
+border-radius: 20px;       
+border: 3px solid #3f3f3f;  
+}
+
+
+.msg_sent {
+    display: inline-block;
+    margin: 5px;
+    background-color: transparent;
+    font-family: fangsong;
+    color: #3f48cc;
+    font-size: 16px;
+}
+.msg_received{
+    margin: 5px;    
+    background-color: transparent;
+    font-family: fangsong;
+    font-size: 16px;
+    color: #000000;
+}
+.msg_created {
+    color: #bfbfbf;
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.message_item_avatar img{
+    width: 30px;
+    height: 30px;
+}
+.msg_date{
+    color: #929292;
+    font-size: 14px;
+    font-family: fangsong;
+}
+.message_item_avatar{
+    margin-right: 10px;
+}
+.chat_item_content{
+    max-height: 280px;
+}
+.chatbox-list {    
+    z-index: 9999;
+}
+.badge-danger {
+    color: #fff;
+    background-color: #de4437;
+}
+.badge {
+    display: inline-block;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;    
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    position: absolute;
+    border-radius: 50px;
+    min-width: 15px;
+    height: 15px;
+    font-size: 9px;
+    padding: 0px;
+    right: 0px;
+    line-height: 15px;
+    top: -5px;
+}
+.chat_class ul {
+    padding: 0px;
+    display: block;
+}
+.chat_class ul li {
+    list-style-type: none;
+    display: inline-block;
+    width: 50%;
+    float: left;
+    text-align: center;
+    font-size: 15px;
+    background-color: #edf2f6;
+    padding: 10px;
+    cursor: pointer;
+}
+.messg-usr-img img {
+    width: 100%;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+    border-radius: 100px;
+    height: 40px;
+}
+.selectednav {
+    background-color: #00557d!important;
+    color: #ffffff;
+    font-weight: 600;
+}
+.btn_clear_message_alert{
+    cursor: pointer;
+}
+.noty-user-img img{
+    width: 35px;
+    height: 35px;
+}
+.nott-list .notification-info span {
+    position: relative;    
+}
+.notification_subject{
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 5px;
+}
+.notification_subject a{
+    color: #00557d;
+    font-weight: 600;
+}
+.notification_body{
+    margin-bottom: 5px;
+}
+.notification-box.msg .nott-list .notification-info span {
+    bottom: auto;
+    top: 0px;
+}
+.notification-box.msg p {
+    line-height: 14px;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 0px;
+}
+.btn_delete_noti {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 14px;
+}
+.nott-list .notfication-details {
+    padding: 10px 25px 5px 15px;
+}
+.badge.cnt_notification
+{
+    right: 10px;
+}
+.notification-box {    
+    border: 1px solid #dedede;
+}
+.notfication-details{
+    cursor: pointer;
+}
+.btn_clear_noti_alert{
+    cursor: pointer;
+}
+.notfication-details .btn-danger {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #dc1515;
+    background-color: transparent;
+    border-color: transparent;
+}
+.nott-list .notification-info {
+    width: 86%;
+    float: left;
+    text-align: left;
+    position: initial;
+}
+.messages-line {
+    float: left;
+    width: 100%;
+    /* height: 604px; */
+    height: calc(69vh);
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.messg-usr-img {
+    position: absolute;
+    bottom: 25px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+}
+
+
+
+
+.selected_nav_content{
+    display: block;
+}
+
+.btn_default{
+    border: 1px solid #00557d;
+    color: white;
+    background-color: #00557d;
+    padding: 3px 15px;
+}
+.alert-border{border-color: #ee0000!important;}
+
+.show-grid .post-bar.bgclr img {
+    margin-bottom: 8px;
+    display: block;
+    width: 80px;
+    height: 80px;
+}
+.show-list .post-bar.bgclr img {
+    width: 90px;
+    height: 90px;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    background: transparent;
+    object-fit: cover;
+    display: block;
+}
+.selected_sub_menu a{    
+    font-weight: 600;
+    background: #00557D!important;
+    color: #07d82a;
+}
+
+
+/* profile page */
+
+.user-pro-img img {
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+    border-radius: 100px;
+    float: none;
+    border: 5px solid #fff;
+    width: 110px;
+    height: 110px;
+    background: #dedede;
+    box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.5);
+}
+
+.cover-sec{
+    margin-top: 55px;
+}
+.btn_close_account
+{
+    width: 100%;
+    border: 1px solid #dedede;
+    color: #bb2828;
+    padding: 5px;
+    background-color: transparent;
+    font-weight: 600;
+}
+.btn_close_account:hover
+{    
+    color: #ff0505;   
+}
+#closeModal .modal-body{
+    width: 500px;
+    margin: auto;
+}
+.text-red{
+    color: #ff0505;
+}
+#btn_close_account{
+    background: red;
+    color: white;
+    padding: 0px 15px;
+    border-radius: 2px;
+}
+.btn_cancel_account{
+    background: rgb(28 132 7);
+    color: white;
+    padding: 0px 15px;
+    border-radius: 2px;
+}
+.new_data_form
+{
+    margin-top: 20px;
+    border: 1px solid #dedede;
+    padding: 20px;
+}
+.btn_common_blue {
+    color: white;
+    background-color: #00557d;
+    padding: 5px 20px;
+    border: 1px solid #00557d;
+    border-radius: 2px;
+    transition: 0.35s;
+}
+.btn_common_blue:hover {
+    color: #00557d;
+    background-color: white;    
+    font-weight: 600;
+}
+/* The container */
+.radio_container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default radio button */
+  .radio_container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Create a custom radio button */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .radio_container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the radio button is checked, add a blue background */
+  .radio_container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .radio_container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .radio_container .checkmark:after {
+       top: 9px;
+      left: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+  }
+/* ----------------------------------------------------- */
+
+@media(max-width:1200px)
+{
+    .m-show{
+        display: block;
+    }
+    nav ul li a {
+        color: #ffffff;
+        font-size: 14px;
+        display: block;       
+    }
+}
+@media(max-width:997px)
+{
+    .pf-gallery img {
+        width: 55px;
+        height: 55px;
+        max-height: 55px;
+        border-radius: 5px;
+    }
+}
+@media(max-width:767px)
+{
+    .usr-pic>img {
+        background-color: #dedede;
+        max-height: none;
+        height: auto;
+    }
+    main {
+        margin-top: 100px;
+    }
+    .m-hidden{
+        display: none!important;
+    }
+    .user-account-settingss
+    {
+        position: fixed!important;
+        top: 56px;
+        left: 0px;
+        width: 100%;
+    }
+}

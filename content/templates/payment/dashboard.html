@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    {% block head %}
+    <title>Payment | My Domain</title>
+    {% endblock %}
+    <main>
+        <div class="main-section">
+            <div class="container">
+                <div class="main-section-data">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 pd-left-none no-pd">
+                            <div class="main-left-sidebar left-sidebar-fixed no-margin">
+                                
+                            </div>                            
+                        </div>
+                        <div class="col-lg-6 col-md-8 no-pd">
+                            <div class="main-ws-sec">                               
+                                <label for="">Check out</label>
+                                <div class="mt-3">
+                                    <label class="radio_container">Paypal
+                                        <input type="radio" checked="checked" name="radio">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="radio_container">Stripe
+                                        <input type="radio" name="radio">
+                                        <span class="checkmark"></span>
+                                    </label>    
+                                </div> 
+                            <div>
+                        </div>
+                        <div class="col-lg-3 pd-right-none no-pd">
+                            <div class="right-sidebar right-sidebar-fixed">                                
+                                            
+                            </div>
+                            <!--right-sidebar end-->
+                        </div>        
+                    </div>                       
+                </div>
+            </div>
+        </div>
+    </main>
+
+    
+    
+
+{% endblock %}

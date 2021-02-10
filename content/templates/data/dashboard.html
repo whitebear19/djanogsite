@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    {% block head %}
+    <title>Data | My Domain</title>
+    {% endblock %}
+    <main>
+        <div class="main-section">
+            <div class="container">
+                <div class="main-section-data">
+                    <div class="row">
+                        
+                        <div class="col-lg-12 col-md-12 no-pd">
+                            <div class="main-ws-sec">
+                                <div class="">
+                                    <label class="mr-3">Data Results</label>
+                                    <a href="{% url 'data:insert' %}">
+                                        <i class="far fa-plus-square"></i>
+                                    </a>
+                                </div>
+                                <div class="mt-2">
+                                    <table id="data_result" class="data_result table">
+                                        <thead>
+                                            <tr>
+                                                <td style="width:20px;" align="center">
+                                                    No
+                                                </td>
+                                                <td align="center">
+                                                    Name
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="data_result_row">
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                               
+                            </div>                            
+                        </div>
+                         
+                    </div>                       
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function get_data()
+        {
+            $("#loading").css("display","flex");
+            $.ajax({                
+                url:"/data/get_data",
+                type: 'get',
+                dataType: 'json',                
+
+                success: function(result){                    
+                    $("#loading").css("display","none");
+                    var data = result.response;
+                    $(".data_result_row").html("");
+                    if(data.length > 0)
+                    {
+                        for (let index = 0; index < data.length; index++) {
+                            
+                            var html = `
+                                <tr>
+                                    <td>${index+1}</td>
+                                    <td>${data[index].name}</td>
+                                </tr>
+                            `;
+
+                            $(".data_result_row").append(html);
+                        }
+                        
+                    }  
+                    $('#data_result').DataTable();     
+                }
+            });
+        }
+        $(document).ready(function(){
+            get_data();
+        });
+    </script>
+    
+
+{% endblock %}

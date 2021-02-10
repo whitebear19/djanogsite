@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+    
+    <main>
+        <div class="main-section profile-section">
+            <div class="container">
+                <div class="main-section-data">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="main-left-sidebar">
+                                <div class="user_profile">
+                                    <div class="user-pro-img">
+                                       
+                                        {% if user.avatar == '' %} 
+                                            <img class="" src="{% static 'images/user.png' %}" alt="">
+                                        {% else %}
+                                            <img class="" src="{{ user.avatar.url }}">
+                                        {% endif %}
+                                        
+                                        <div class="add-dp" id="OpenImgUpload">
+                                            <input type="file" id="editUserAvatar" name="file-attachment" accept=".jpg, .jpeg, .png, .gif">
+                                            <label for="editUserAvatar"><i class="fas fa-camera"></i>
+                                            </label>
+                                        </div>
+                                        
+                                    </div>
+                                    <h1 class="font-weight-bold">{{ user.first_name }} {{ user.last_name }}</h1>
+                                                                      
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="main-ws-sec">
+                                <div class="uc-tabs-content current animated fadeIn">
+                                    <ul class="nav nav-tabs nav-fill border bg-white" role="tablist">                                       
+                                        <li class="nav-item">
+                                            <a class="tab_user_profile nav-link py-3 active" data-tab="basic-info" id="basic-info-tab" data-toggle="tab"
+                                                href="#basic-info" role="tab" aria-controls="basic-info"
+                                                aria-selected="true">Basic Info</a>
+                                        </li>                                        
+                                    </ul>
+                                    <div class="tab-content">                                        
+                                       
+                                        <div class="tab-pane tab_pane_user_profile fade  show active" id="basic-info" role="tabpanel"
+                                            aria-labelledby="basic-info">
+                                            <div class="user-profile-ov">
+                                                <h3 class="heading-with-action">
+                                                    <span class="overview-open">Basic Information</span>
+                                                    
+                                                    <span class="title-action"><a href="#" data-toggle="modal"
+                                                            data-target="#basicInfoModal" class="overview-open"><i
+                                                                class="fa fa-pencil"></i></a></span>
+                                                    
+                                                </h3>
+                                                <div class="row user-basic-info">
+                                                    <div class="col-md-6 form-group">
+                                                        <h4 class="mb-0">First Name</h4>
+                                                        <p>{{ user.first_name }}</p>
+                                                    </div>
+                                                    <div class="col-md-6 form-group">
+                                                        <h4 class="mb-0">Last Name</h4>
+                                                        <p>{{ user.last_name }}</p>
+                                                    </div>
+                                                    <div class="col-md-6 form-group">
+                                                        <h4 class="mb-0">Email</h4>
+                                                        <p>                                                           
+                                                            <span class="text-blue nav_user_content">{{ user.email }}</span>
+                                                        </p>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6 form-group">
+                                                        <h4 class="mb-0">Gender</h4>
+                                                        <p>
+                                                            {{ user.gender }}
+                                                        </p>
+                                                    </div>
+                                                    
+                                                    
+                                                    <div class="col-md-6 form-group">
+                                                        <h4 class="mb-0">Current location</h4>
+                                                        <p>
+                                                            {% if user.location %}
+                                                                <span class="text-blue nav_user_content">{{ user.location }}</span>
+                                                            {% else %}
+                                                                <span>Not provided.</span>
+                                                            {% endif%} 
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="right-sidebar">
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+   
+    <!-- Basic Info Modal Popup -->
+    <div class="modal fade" id="basicInfoModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content bg-transparent border-0">
+                <div class="modal-body">
+                    <div class="bg-white p-4">
+                        <form id="form_basicinfo" method="POST">
+                        {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h5 class="mb-3 font-weight-bold">Basic Information</h5>
+                                </div>
+                                <div class="col-lg-6 form-group">
+                                    <label>First Name</label>
+                                    <input type="text" name="fname" class="form-control required_form_basicinfo" value="{{ user.first_name }}" />
+                                </div>
+                                <div class="col-lg-6 form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" name="lname" value="{{ user.last_name }}" class="form-control required_form_basicinfo" />
+                                </div>
+                                <div class="col-lg-6 form-group">
+                                    <label>Email Address</label>                                    
+                                    <input type="email" class="form-control required_form_basicinfo"
+                                        aria-describedby="emailHelpBlock" name="email" value="{{ user.email }}" />
+                                   
+                                </div>
+                               
+                                
+                                <div class="col-lg-6 form-group">
+                                    <label>Gender</label>
+                                    <div class="pt-2">
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="male" name="gender"
+                                                value="Male" {% if user.gender == 'Male' %} checked {% endif %} />
+                                            <label class="custom-control-label" for="male">
+                                                Male
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="female"
+                                                name="gender" value="Female"
+                                                {% if user.gender == 'Female' %} checked {% endif %} 
+                                                />
+                                            <label class="custom-control-label" for="female">
+                                                Female
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="other"
+                                                name="gender" {% if user.gender == 'Other' %} checked {% endif %} value="Other" />
+                                            <label class="custom-control-label" for="other">
+                                                Other
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-6 form-group">
+                                    <label>Current location</label>
+                                    <input type="text" name="location" class="form-control required_form_basicinfo"
+                                    value="{{ user.location }}"
+                                    />
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="post-st">
+                                        <ul>
+                                            <li>
+                                                <button type="button" class="btn btn-primary" id="btn_store_basic_profile">Save</button>
+                                            </li>
+                                            <li>
+                                                <button type="button" data-dismiss="modal"
+                                                    class="btn btn-secondary">Cancel</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        $(document).ready(function()
+        {
+            $(document).on('change','#editUserAvatar',function(){
+                var file = document.getElementById('editUserAvatar');
+                var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+                var formdata = new FormData;
+                if (file.files[0])
+                {
+                    if ($.inArray(file.files[0]['name'].split('.').pop().toLowerCase(), fileExtension) == -1) {
+                        alert("Only formats are allowed : "+fileExtension.join(', '));
+                        $("#editUserAvatar").val("");
+                        return false;
+                    }
+                    if(file.files[0].size > 2000000)
+                    {
+                        alert("File size should be less than 2Mb.");
+                        return false;
+                    }
+                    formdata.append('attach',file.files[0]);
+                }
+                var token = '{{csrf_token}}';
+                formdata.append('is_store','1');
+                $("#loading").css("display","block");
+                $.ajax({
+                    headers: { "X-CSRFToken": token },
+                    url:"{% url 'account:upload_avatar' %}",
+                    type: 'post',
+                    dataType: 'json',
+                    data: formdata,
+
+                    processData: false,
+                    contentType: false,
+                    success: function(result){                  
+                        location.reload();
+                    },
+                    error: function(result){
+                        location.reload();
+                    }
+                });
+            });
+
+                        
+        });
+    </script>
+ 
+{% endblock %}

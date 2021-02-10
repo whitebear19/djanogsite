@@ -1,0 +1,1007 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-touch">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      
+   {% block head %}
+        <title></title>
+        <meta name="description" content="">
+    {% endblock head %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
+   <meta name="keywords" content="">
+   <link rel="icon" type="image/png" href="{% static 'images/fav.png' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+		integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+  
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'css/datatables.min.css' %}">
+   <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+   <script type="text/javascript" src="{% static 'js/datatables.min.js' %}"></script> 
+   
+</head>
+
+<body>
+
+	<div class="wrapper">
+		<header>
+			<div class="container">
+				<div class="header-data">
+					<div class="logo">
+						<a href="/" title="">
+							<img src="{% static 'images/logo.png' %}" alt="">
+						</a>
+					</div>
+					<!--logo end-->
+					<div class="search-bar">
+						<form>
+							<input type="text" name="search" placeholder="Search...">
+							<button type="submit"><i class="fa fa-search"></i></button>
+						</form>
+					</div>
+					<!--search-bar end-->
+					<nav class="">
+						<ul>		
+                     <li class="sub_menu_item sub_menu_item_ticket">
+								<a href="{% url 'ticket:dashboard' %}" title="" class="not-box-openm pos_rel">
+                           <span class="badge badge-danger badge-counter"></span>
+									<span><i class="fas fa-ticket-alt"></i></span>
+									Ticket
+								</a>
+                     </li>
+                     <li class="sub_menu_item sub_menu_item_data">
+								<a href="{% url 'data:dashboard' %}" title="" class="not-box-openm pos_rel">
+                           <span class="badge badge-danger badge-counter"></span>
+									<span><i class="fas fa-database"></i></span>
+									Data
+								</a>
+							</li>
+							<li class="sub_menu_item sub_menu_item_messages">
+								<a href="/messages" title="" class="not-box-openm pos_rel">
+                           <span class="badge badge-danger badge-counter cnt_msg"></span>
+									<span><i class="fas fa-envelope"></i></span>
+									Messages
+								</a>
+								<div class="notification-box msg" id="message">
+									<div class="nt-title">
+										<h4>Setting</h4>
+										<a title="" class="btn_clear_message_alert">Clear all</a>
+									</div>
+									<div class="nott-list">
+										<div class="nott-inner new_message_list new_message_list_nav">
+											                                 										
+										</div>
+										<div class="view-all-nots">
+											<a href="/messages" title="">View
+												All Messsages</a>
+										</div>
+									</div>
+									<!--nott-list end-->
+								</div>
+								<!--notification-box end-->
+                     </li>
+                     <li class="sub_menu_item sub_menu_item_contract">
+								<a href="{% url 'contract:dashboard' %}" title="" class="not-box-openm pos_rel">
+                           <span class="badge badge-danger badge-counter"></span>
+									<span><i class="fas fa-file-contract"></i></span>
+									Contract
+								</a>
+							</li>
+							<li class="sub_menu_item sub_menu_item_checkout">
+								<a href="{% url 'payment:dashboard' %}" title="" class="not-box-openm pos_rel">
+                           <span class="badge badge-danger badge-counter"></span>
+									<span><i class="fas fa-shopping-cart"></i></span>
+									Checkout
+								</a>
+							</li>
+						</ul>
+					</nav>
+					<!--nav end-->
+					<div class="menu-btn">
+						<a href="#" title=""><i class="fa fa-bars"></i></a>
+					</div>
+					<!--menu-btn end-->
+					<div class="user-account">
+						<div class="user-info">
+                    
+                     {% if user.avatar == '' %} 
+                        <img class="cur_user_avatar_url" src="{% static 'images/user.png' %}" alt="">
+                     {% else %}
+                        <img class="cur_user_avatar_url" src="{{ user.avatar.url }}">
+                     {% endif %}
+							<a href="#" title="" class="user_full_name">{{ user.first_name }}</a>
+							<i class="fa fa-sort-down"></i>
+						</div>
+						<div class="user-account-settingss" id="users" style="display: none;">
+							<h3>Setting</h3>
+							<ul class="us-links">
+								<li><a href="{% url 'account:profile' %}" title="">My Account</a></li>							
+								
+								
+							</ul>
+							
+							<h3 class="tc">
+                        <a class="dropdown-item" href="javascript:{document.getElementById('logout').submit()}">
+                           <span>
+                              <svg aria-hidden="true" style="width: 15px;height:15px;" focusable="false" data-prefix="fal" data-icon="sign-out" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-sign-out fa-w-16 fa-3x"><path fill="currentColor" d="M48 64h132c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H48c-8.8 0-16 7.2-16 16v288c0 8.8 7.2 16 16 16h132c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48zm279 19.5l-7.1 7.1c-4.7 4.7-4.7 12.3 0 17l132 131.4H172c-6.6 0-12 5.4-12 12v10c0 6.6 5.4 12 12 12h279.9L320 404.4c-4.7 4.7-4.7 12.3 0 17l7.1 7.1c4.7 4.7 12.3 4.7 17 0l164.5-164c4.7-4.7 4.7-12.3 0-17L344 83.5c-4.7-4.7-12.3-4.7-17 0z" class=""></path></svg>
+                           </span>
+                           Logout
+                        </a>
+                        <form method="post" action="{% url 'account:logout' %}" id="logout">
+                            {% csrf_token %}
+                            <input type="hidden">
+                        </form>
+                     </h3>
+						</div>
+						<!--user-account-settingss end-->
+					</div>
+				</div>
+				<!--header-data end-->
+			</div>
+		</header>
+		<!--header end-->
+      {% block content %}
+                    
+      {% endblock %}
+		
+		<div class="chatbox-list contact_list_global d-none">
+			<div class="chatbox">
+				<div class="chat-mg bx">
+					<a href="#" title=""><img src="{% static 'images/chat.png' %}" alt=""></a>
+					<span>2</span>
+				</div>
+				<div class="conversation-box">
+					<div class="con-title">
+						<h3>Messages</h3>
+						<a href="#" title="" class="close-chat"><i class="fa fa-minus-square"></i></a>
+					</div>
+					<div class="chat-list contact_list">						
+						
+					</div>
+					<!--chat-list end-->
+				</div>
+				<!--conversation-box end-->
+			</div>
+		</div>
+		<div class="chat_box_area">
+
+      </div>
+
+	</div>
+	<!--theme-layout end-->
+
+	<!-- Post Media Modal Popup -->
+	<button type="button" class="btn btn-primary btn-post-media-modal d-none" data-toggle="modal"
+		data-target="#postMediaModal">Custom
+		post media</button>
+
+	<div class="modal fade" id="postMediaModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+			<div class="modal-content bg-transparent border-0">
+				<div class="modal-body">
+					<div class="embed-responsive embed-responsive-16by9">
+						<img id="post-image-media" class="embed-responsive-item" src="" alt="" style="display: none;" />
+						<video id="post-video-media" class="embed-responsive-item" controls
+							style="display: none;"></video>
+					</div>
+				</div>
+				<div class="modal-footer bg-dark border-0">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+   </div>
+   <div>         
+      <input type="hidden" id="page_where" value="global">
+      <input type="hidden" id="room_id_global" value="">
+   </div>
+   <div class="process-comm" id="loading">
+      <div class="spinner">
+         <div class="bounce1"></div>
+         <div class="bounce2"></div>
+         <div class="bounce3"></div>
+      </div>
+   </div>
+   <form action="" class="d-none" id="meta_csrf" method="post">
+      {% csrf_token %}
+   </form>
+	<div>
+      <form action="{% url 'account:messages' %}" id="go_message" method="get">
+
+      </form>
+   </div>
+	<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.mousewheel.min.js' %}"></script>
+   <script type="text/javascript" src="{% static 'js/jquery.mCustomScrollbar.js' %}"></script>
+   <script type="text/javascript" src="{% static 'js/jquery.cookie.js' %}"></script>
+   <script type="text/javascript" src="{% static 'js/owl.carousel.js' %}"></script>
+   <script type="text/javascript" src="{% static 'js/sweetalert2.js' %}"></script>   
+   <script type="text/javascript" src="{% static 'js/autosize.js' %}"></script>   
+  
+	<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+
+   <script>
+      var page_where = false;
+      var cur_user_avatar_url = '';
+      function get_new_message_global()
+      {
+         $.ajax({
+             url: "{% url 'chat:get_new_message_global' %}",
+             method: 'GET', 
+             type: 'json',                  
+             success: function (response) {
+                
+               data = response.messages;
+               
+               $(".new_message_list").html("");
+               var cnt_msg=0;
+               for(var i=0;i<data.length;i++)
+               {
+                  var html=`
+                     <div class="notfication-details new_message_item" data-rid="${data[i].room_id}" data-username="${data[i].full_name}">
+                        <div class="noty-user-img">
+                           <img src="`;
+                              if(data[i].user_avatar=="")
+                              {
+                              html+='/static/images/avatar.png'
+                              }
+                              else
+                              {
+                              html+= data[i].user_avatar
+                              }
+                           html +=
+                           `" alt="">
+                        </div>
+                        <div class="notification-info text-truncate">
+                           <h3><a href="#" title="">${data[i].full_name}</a> </h3>
+                           <p>${data[i].message}</p>
+                           <span>${data[i].created_at} ago</span>
+                        </div>												
+                     </div>
+                  `;
+
+                  $(".new_message_list").append(html);
+                  cnt_msg += parseInt(data[i].cnt_message);                     
+               }
+               
+               if(cnt_msg > 0)
+               {
+                  $('.cnt_msg').html(cnt_msg);
+               }
+               else
+               {
+                  $('.cnt_msg').html('');
+               }
+             }
+         });
+      }
+
+      function get_stored_message_nav()
+      {
+         $.ajax({
+            url: "{% url 'chat:get_stored_message_nav' %}",
+            method: 'GET', 
+            type: 'json',                      
+            success: function (response) {
+               var data = response.messages;
+               for(var i=0;i<data.length;i++)
+               {
+                  var html=`
+                     <div class="notfication-details new_message_item" data-rid="${data[i].room_id}" data-username="${data[i].full_name}">
+                        <div class="noty-user-img">
+                           <img src="`;
+                              if(data[i].user_avatar=="")
+                              {
+                              html+='/static/images/avatar.png'
+                              }
+                              else
+                              {
+                              html+= data[i].user_avatar
+                              }
+                           html +=
+                           `" alt="">
+                        </div>
+                        <div class="notification-info text-truncate">
+                           <h3><a href="#" title="">${data[i].full_name}</a> </h3>
+                           <p>${data[i].message}</p>
+                           <span>${data[i].created_at} ago</span>
+                        </div>												
+                     </div>
+                  `;
+
+                  $(".new_message_list_nav").append(html);
+                  cnt_msg += parseInt(data[i].cnt_message);                     
+               }     
+            }
+         })
+      }
+
+
+      function get_all_room()
+      {
+         $.ajax({
+            url: "{% url 'chat:get_all_room' %}",
+            method: 'GET', 
+            type: 'json',   
+            data: {searchword:$(".searchword").val()},                      
+            success: function (response) {
+               var rooms = response.rooms;
+              
+               if(rooms.length > 0)
+               {                     
+                  $(".contact_list").html("");
+                  for(var i=0;i<rooms.length;i++)
+                  {  
+                     var html="";
+                     if(page_where)
+                     {
+                        html +=`
+                           <li class="conv-list btn_room_item" data-rid="${rooms[i].room_id}" data-accepted="${rooms[i].accepted}"  data-status="${rooms[i].status}" data-username="${rooms[i].full_name}">
+                              <div class="usr-msg-details">
+                                 <div class="usr-ms-img">`;
+                                    
+                                 if(rooms[i].avatar=="")
+                                 {  
+                                    html += '<span class="user_no_avatar_40 capital">'+(rooms[i].full_name).charAt(0)+'</span>';
+                                 }
+                                 else
+                                 {
+                                    html +=`<img src="${rooms[i].avatar}" alt="" class="mCS_img_loaded">`; 
+                                 }
+                                    
+                           html += `<span class="msg-status"></span>
+                                 </div>
+                                 <div class="usr-mg-info">
+                                    <h3>${rooms[i].full_name}</h3>
+                                    <p>${rooms[i].message}</p>
+                                 </div> <span class="posted_time">${rooms[i].created_at} ago</span>`;
+                                 if(rooms[i].cnt_message !="")
+                                 {
+                                    html +=`<span class="msg-notifc msg-numbers">${rooms[i].cnt_message}</span>`;
+                                 } 
+                           html  += `
+                              </div>
+                           </li>
+                        `;
+                     }
+                     else
+                     {
+                        html +=`<div class="conv-list btn_room_item" data-rid="${rooms[i].room_id}" data-accepted="${rooms[i].accepted}"  data-status="${rooms[i].status}" data-username="${rooms[i].full_name}">`;
+                        html +=`<div class="user-pic">`;
+                        if(rooms[i].avatar=="")
+                        {  
+                        
+                           html += '<span class="user_no_avatar capital">'+(rooms[i].full_name).charAt(0)+'</span>';
+                        }
+                        else
+                        {
+                           html +=`<img src="${rooms[i].avatar}" alt="" class="mCS_img_loaded">`;                        
+                        }
+                        
+                        html +=`<span class="active-status activee"></span>`;
+                        html +=`</div>`;
+                        html +=`<div class="user-info-contact">`;
+                        html +=`<h3>${rooms[i].full_name}</h3>`;
+                        html +=`<div class="ct-time">`;
+                        html +=`<span>${rooms[i].created_at}</span>`;
+                        html +=`</div>`;
+                        html +=`</div>`;
+                        if(rooms[i].cnt_message !="")
+                        {
+                           html +=`<span class="msg-numbers">${rooms[i].cnt_message}</span>`;
+                        } 
+                        html +=`</div>`;
+                     }
+                     
+                     if(rooms[i].status == '1')
+                     {
+                        $(".contact_list").append(html);
+                     }
+                     else
+                     {
+                        $(".history_list").append(html);
+                     }
+                  }        
+               }
+            }
+         })
+      }
+      
+      function send_message_global()
+      {
+         var dt = new Date();
+         var room_id = $("#room_id_global").val();
+                 
+         var time = dt.getHours() + ":" + dt.getMinutes();
+         if(page_where)
+         {
+            var message = $(".send_message_global_message").val();
+         }
+         else
+         {
+            var message = $(".send_message_global_"+room_id).val();
+         }
+         
+         if(message == "")
+         {
+            return false;
+         }
+         if(room_id == "")
+         {
+            return false;
+         }
+         var html = "";         
+         
+
+         if(page_where)
+         {
+            
+            html +=`
+               <div class="main-message-box ta-right" data-mid="">
+                  <div class="message-dt">
+                     <div class="message-inner-dt">
+                        <p>
+                           ${message}
+                        </p>
+                     </div>
+                     <span>${time}</span>
+                  </div>
+                  <div class="messg-usr-img">
+                     <img src="${cur_user_avatar_url}" alt="" class="mCS_img_loaded">
+                  </div>
+               </div>
+            `;
+
+
+            $('.chat_item_content_message').append(html);
+            $(".send_message_global_message").val("");
+            $('.chat_item_view_body_message').scrollTop($('.chat_item_view_body_message')[0].scrollHeight);
+         }
+         else
+         {         
+            html += '<li><div class="message_item align-items-center osahan-post-header"><div class="mr-1 text-right"><p class="msg_sent" title=""><span class="msg_created mr-1">'+time+'</span>'+message+'</p></div></div></li>';
+
+            $('.chat_item_content_'+room_id).append(html);
+            $(".send_message_global_"+room_id).val("");
+            
+            $('.chat_item_view_body_'+room_id).scrollTop($('.chat_item_view_body_'+room_id)[0].scrollHeight);
+         }         
+         $.ajax({
+            url: "{% url 'chat:store_message' %}",
+            method: 'GET', 
+            type: 'json',    
+            data: {room_id:room_id,message:message},                       
+            success: function (response) {                  
+               if(!response.results)
+               {
+                  $.cookie('room_id', '');
+                  $.cookie('username', '');                    
+                  location.reload();
+               }
+            }
+         });
+      }
+      
+      function get_new_message()
+      {
+         if($("#room_id_global").val() == "")
+         {
+            return false;
+         }
+         else
+         {            
+            $.ajax({
+               url: "{% url 'chat:get_new_message' %}",
+               method: 'GET', 
+               type: 'json',    
+               data: {room_id:$("#room_id_global").val()},                       
+               success: function (response) {
+                  var messages = response.messages;
+                  for(var j=0;j<messages.length;j++)
+                  {
+                        var checked = true;
+                        $(".message_item").each(function(){
+                           if(messages[j].message_id == $(this).data('mid'))
+                           {
+                              checked = false;
+                           }
+                        });
+                        if(checked)
+                        {
+                           
+                           var html = "";
+                           if(messages[j].me=="0")
+                           {
+                              if(page_where)
+                              {
+                                 html +=`
+                                 <div class="main-message-box st3" data-mid="${messages[j].message_id}">
+                                    <div class="message-dt st3">
+                                       <div class="message-inner-dt">
+                                          <p title="${messages[j].created_at} ago">
+                                             ${messages[j].message}
+                                          </p>
+                                       </div>
+                                       <span>${messages[j].time}</span>
+                                    </div>
+                                    <div class="messg-usr-img">`;
+                                    if(messages[j].avatar=="")
+                                    {                                    
+                                       html +=`<img src="/static/images/user.png" alt="" class="mCS_img_loaded">`;
+                                    }
+                                    else
+                                    {                                    
+                                       html +=`<img src="${messages[j].avatar}" alt="" class="mCS_img_loaded">`;
+                                    }   
+                                       
+                              html +=`</div>
+                                 </div>
+                              `;
+                              }
+                              else
+                              {
+                                 html += '<li><div data-mid="'+messages[j].message_id+'" class="d-flex message_item align-items-center osahan-post-header"><div class="message_item_avatar"><img src="';
+                                 if(messages[j].avatar=="")
+                                 {
+                                       html += "/static/images/user.png";
+                                 }
+                                 else
+                                 {
+                                       html += messages[j].avatar;
+                                 }
+                                 html +='" alt=""></div><div class="mr-1"><p class="msg_received" title="'+messages[j].created_at+' ago">'+messages[j].message+'</p></div></div></li>';
+                                 $('.chat_item_content_'+messages[j].room_id).append(html);  
+                                 $('.chat_item_view_body_'+messages[j].room_id).scrollTop($('.chat_item_view_body_'+messages[j].room_id)[0].scrollHeight); 
+                              }
+                              
+                             
+                           }
+                           else
+                           {
+                              if(page_where)
+                              {
+                                 html +=`
+                                    <div class="main-message-box ta-right" data-mid="${messages[j].message_id}">
+                                       <div class="message-dt">
+                                          <div class="message-inner-dt">
+                                             <p title="${messages[j].created_at} ago">
+                                                ${messages[j].message}
+                                             </p>
+                                          </div>
+                                          <span>${messages[j].time}</span>
+                                       </div>
+                                       <div class="messg-usr-img">
+                                          <img src="`;
+                                          if(messages[j].avatar=="")
+                                          {
+                                             html += "/static/images/user.png";
+                                          }
+                                          else
+                                          {
+                                             html += messages[j].avatar;
+                                          }
+                                 html += `" alt="" class="mCS_img_loaded">
+                                       </div>
+                                    </div>
+                                 `;
+                              }
+                              else
+                              {
+                                 html += '<li><div data-mid="'+messages[j].message_id+'" class="message_item align-items-center osahan-post-header"><div class="mr-1 text-right"><p class="msg_sent" title="'+messages[j].created_at+' ago">'+messages[j].message+'</p></div></div></li>';
+                              }
+                              
+                           }
+                        }
+                                          
+                  }                 
+               }
+            })
+         }
+     }
+
+     
+      function get_stored_message()
+      {
+         $('#loading').css('display','block');
+         var rid = $("#room_id_global").val();
+         $.ajax({
+             url: "{% url 'chat:get_stored_message' %}",
+             method: 'GET', 
+             type: 'json',    
+             data: {room_id:rid},                       
+             success: function (response) {
+                  var messages = response.messages;    
+                  $('#loading').css('display','none');                         
+                  $('.chat_item_content_'+rid).html(""); 
+                  if($("#page_where").val()=="message")
+                  {
+                     $('.chat_item_content_message').html("");                        
+                  }       
+                 var iswhen = '';
+                 for(var j=0;j<messages.length;j++)
+                 {
+                     var html = "";
+                     if(iswhen == messages[j].date)
+                     {
+
+                     }
+                     else
+                     {
+                        iswhen = messages[j].date;
+                        if(page_where)
+                        {
+                           html +=`
+                              <div class="text-center mt-2 mb-2">
+                                 <span class="d-block">
+                                    ${messages[j].date}
+                                 </span>
+                              </div>
+                           `;
+                        }
+                        else
+                        {
+                           html +=`
+                              <li>
+                                 <div class="text-center mt-15 mb-15">
+                                    <label class="msg_date">
+                                       ${messages[j].date}
+                                    </label>
+                                 </div>
+                              </li>
+                           `;
+                        }
+                        
+                     }
+                     if(messages[j].me=="0")
+                     {
+                        if(page_where)
+                        {
+                           html +=`
+                              <div class="main-message-box st3" data-mid="${messages[j].message_id}">
+                                 <div class="message-dt st3">
+                                    <div class="message-inner-dt">
+                                       <p title="${messages[j].created_at} ago">
+                                          ${messages[j].message}
+                                       </p>
+                                    </div>
+                                    <span>${messages[j].time}</span>
+                                 </div>
+                                 <div class="messg-usr-img">`;
+                                 if(messages[j].avatar=="")
+                                 {                                    
+                                    html +=`<img src="/static/images/user.png" alt="" class="mCS_img_loaded">`;
+                                 }
+                                 else
+                                 {                                    
+                                    html +=`<img src="${messages[j].avatar}" alt="" class="mCS_img_loaded">`;
+                                 }   
+                                    
+                           html +=`</div>
+                              </div>
+                           `;
+                        }
+                        else
+                        {
+                           html += `
+                           <li>
+                              <div data-mid="${messages[j].message_id}" class="d-flex message_item align-items-center osahan-post-header">
+                                 <div class="message_item_avatar">
+                                    <img class="" src="`;
+                                    if(messages[j].avatar=="")
+                                    {
+                                       html += "/static/images/user.png";
+                                    }
+                                    else
+                                    {
+                                       html += messages[j].avatar;
+                                    }
+                           html +=`" alt="">
+                                 </div>
+                                 <div class="mr-1">
+                                    <p class="msg_received" title="${messages[j].created_at} ago">${messages[j].message}
+                                       <span class="ml-1 msg_created">${messages[j].time}</span>
+                                    </p>
+                                 </div>
+                              </div>
+                           </li>`;
+                        }
+                         
+                     }
+                     else
+                     {
+                        if(page_where)
+                        {
+                           html +=`
+                              <div class="main-message-box ta-right" data-mid="${messages[j].message_id}">
+                                 <div class="message-dt">
+                                    <div class="message-inner-dt">
+                                       <p title="${messages[j].created_at} ago">
+                                          ${messages[j].message}
+                                       </p>
+                                    </div>
+                                    <span>${messages[j].time}</span>
+                                 </div>
+                                 <div class="messg-usr-img">
+                                    <img src="`;
+                                    if(messages[j].avatar=="")
+                                    {
+                                       html += "/static/images/user.png";
+                                    }
+                                    else
+                                    {
+                                       html += messages[j].avatar;
+                                    }
+                           html += `" alt="" class="mCS_img_loaded">
+                                 </div>
+                              </div>
+                           `;
+                        }
+                        else
+                        {
+                           html += `
+                              <li>
+                                 <div data-mid="${messages[j].message_id}" class="message_item align-items-center osahan-post-header">
+                                    <div class="mr-1 text-right">
+                                       <p class="msg_sent" title="${messages[j].created_at} ago">
+                                          <span class="msg_created mr-1">${messages[j].time}</span>
+                                          ${messages[j].message}
+                                       </p>
+                                    </div>
+                                 </div>
+                              </li>
+                           `;
+                        }
+                         
+                     }  
+
+                     if($("#page_where").val()=="message")
+                     {                          
+                        $('.chat_item_content_message').append(html);
+                     }                  
+                     else
+                     {
+                        $('.chat_item_content_'+rid).append(html);
+                     }
+                         
+                                         
+                 }   
+                 if(page_where)
+                 {
+                     $('.chat_box_username_message').html($.cookie('username')); 
+                     $('.chat_item_view_body_message').scrollTop($('.chat_item_view_body_message')[0].scrollHeight);  
+                                            
+                 }
+                 else
+                 {                  
+                    $('.chat_item_view_body_'+rid).scrollTop($('.chat_item_view_body_'+rid)[0].scrollHeight);  
+                 }
+                            
+             }
+         })
+     }
+     
+      
+
+      function page_init()
+      {
+         cur_user_avatar_url = $('.cur_user_avatar_url').prop('src');
+         if($("#page_where").val()=="message")
+         {                          
+            page_where = true;
+            $(".chat_box_area").remove();
+         }                  
+         else
+         {
+            page_where = false;
+         }
+         
+         get_all_room();
+         get_new_message_global();            
+        
+         get_stored_message_nav();
+         if($.cookie('chatlistextends'))
+         {
+            if($.cookie('chatlistextends')=='1')
+            {
+               $(".contact_body").css("display","block");
+            }
+            else{
+               $(".contact_body").css("display","none");
+            }
+         }
+         else
+         {
+            $.cookie('chatlistextends','0');
+            $(".contact_body").css("display","none");
+         }
+         if(page_where)
+         {
+            if($.cookie('room_id'))
+            {               
+               var room_id =  $.cookie('room_id');                  
+               $("#room_id_global").val(room_id);                  
+               get_stored_message();
+            
+            }
+         }
+         
+      }
+      $(document).ready(function(){
+         page_init();
+       
+         setInterval(function(){                 
+            // get_new_message_global();               
+            // get_new_message();
+            // get_all_room();
+            
+            
+         }, 2000);
+         $('.send_message_global').keypress(function(event){
+             var keycode = (event.keyCode ? event.keyCode : event.which);
+             if(keycode == '13'){
+               send_message_global()
+             }                
+         });
+         
+         $(document).on('click','.btn_send',function(){               
+            send_message_global();
+         });
+         
+         $(document).on('click','.btn_close_chat_box',function(){   
+            var rid = $(this).data('rid');            
+            $(".chat_item_view_"+rid).remove();
+            
+         });
+         $(document).on('click','.btn_room_item',function(){               
+            var rid = $(this).data('rid');
+            var username = $(this).data('username');  
+            var status = $(this).data('status');
+            
+            $(".btn_room_item").removeClass('active');
+            $(this).addClass("active");
+            $("#room_id_global").val(rid);
+                          
+            $.cookie('room_id', rid);
+            $.cookie('username', username); 
+            
+            if(!page_where)
+            {     
+               var chat_item_html = '';
+               chat_item_html = `
+                  <div class="chat_item_view chat_item_view_${rid}" data-rid="${rid}" data-username="${username}">
+                     <div class="chat_item_view_header pos_rel">
+                        <span class="chat_box_username chat_box_username_${rid}"></span>
+                        <button class="btn_close_chat_box" data-rid="${rid}">
+                           <i class="fas fa-times"></i>
+                        </button>
+                     </div>
+                     <div class="chat_item_view_body_${rid} custom_scroll common_body_chat_contact">
+                        <ul class="chat_item_content chat_item_content_${rid}">
+                              
+                        </ul>
+                     </div>
+                     <div class="chat_item_type_message">
+                        <div class="pos_rel">               
+                           <textarea type="text" class="send_message_global send_message_global_${rid}" placeholder="Type a message"></textarea>
+                           <button type="button" class="btn_global_chat btn_send">
+                              <i class="fas fa-paper-plane"></i>
+                           </button>
+                           <input type="hidden" class="cur_room_id" value="${rid}">
+                        </div>            
+                     </div>
+                  </div>
+               `;
+               if($(".chat_box_area").find(".chat_item_view_"+rid))
+               {                  
+                  $(".chat_item_view_"+rid).remove();
+               }
+               $(".chat_box_area").prepend(chat_item_html);
+                              
+               
+            }
+
+            if(page_where)
+            {
+               $(".chat_box_username_message").html(username);
+            }
+            else
+            {
+               $(".chat_box_username_"+rid).html(username);
+            }
+            
+            
+            get_stored_message();
+            
+         });
+         $(document).on('click','.send_message_global',function(){
+             $.ajax({
+                 url: "{% url 'chat:set_read' %}",
+                 method: 'GET', 
+                 type: 'json',    
+                 data: {room_id:$("#room_id_global").val()},                       
+                 success: function (response) {
+                     if(!response)
+                     {
+                         location.reload();
+                     }
+                 }
+             });
+         });
+         
+         
+         $(document).on('click','.contact_list_global_header',function(){               
+            $(".contact_body").slideToggle();
+            if($.cookie('chatlistextends')=="1")
+            {
+               $.cookie('chatlistextends','0');
+            }
+            else
+            {
+               $.cookie('chatlistextends','1');
+            }
+            
+         });
+         
+         $(document).on('click','.new_message_item',function(){               
+            var rid = $(this).data('rid');               
+            var username = $(this).data('username');               
+            $.cookie('room_id', rid);
+            $.cookie('username',username)
+            $("#go_message").submit();
+         });
+
+        
+         $(document).on('click','.btn_close_search_result',function(){               
+            $('.search_result_view').addClass('display_none');              
+         });
+         $(document).on('click','.chat_item_view',function(){               
+            var rid = $(this).data('rid');
+            var username = $(this).data('username');
+            $("#room_id_global").val(rid);
+            $.cookie('room_id', rid);  
+            $.cookie('username', username);
+         });            
+
+         $(document).on('click','.btn_clear_message_alert',function(){
+            $(".cnt_msg").html("");
+            $(".new_message_list").html("");
+            $.ajax({
+             url: "{% url 'chat:clear_message_alert' %}",
+             method: 'GET', 
+             type: 'json',             
+             success: function (response) {  
+
+             }
+            });
+         });
+         $(document).on('click','.btn_clear_noti_alert',function(){
+            $(".cnt_notification").html("");
+            $(".notification_unread").html("");
+            $.ajax({
+             url: "{% url 'chat:clear_noti_alert' %}",
+             method: 'GET', 
+             type: 'json',             
+             success: function (response) {  
+               if(!response.results)
+               {
+                  location.reload();
+               }
+             }
+            });
+         });
+      });
+      
+   </script>
+
+</body>
+
+</html>
