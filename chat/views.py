@@ -21,7 +21,7 @@ from django.urls import reverse_lazy
 from account.models import CustomUser
 from chat.models import Room,Message
 
-from account.views import get_client_ip,get_geolocation_for_ip,get_random_string
+from account.views import get_client_ip,get_geolocation_for_ip,get_random_string,get_different_time,get_time_str,get_date_str
 
 
 import datetime
@@ -242,7 +242,7 @@ def set_read(request):
 def get_stored_message(request):
     messages=[]
     try:
-        room_id = request.GET.get('room_id')  
+        room_id = request.GET.get('room_id')          
         user = request.user
         cur_RoomCheck = Room.objects.get(id=room_id)
         if (cur_RoomCheck.who == user.id) or (cur_RoomCheck.whom == user.id):

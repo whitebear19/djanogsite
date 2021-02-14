@@ -56,8 +56,11 @@ def insert(request):
 def store(request):
                
     name = request.POST.get('name')
+    volume = request.POST.get('volume')
+    available = request.POST.get('available')
     try:
-        row = Data(name=name)
+        user = request.user
+        row = Data(name=name,volume=volume,available=available,user_id=user.id)
         row.save()
         return JsonResponse({'response':True})
     except:
@@ -72,6 +75,8 @@ def get_data(request):
         for item in datatemp:
             data = {}
             data['name'] = item.name
+            data['volume'] = item.volume
+            data['available'] = item.available
             results.append(data)
         return JsonResponse({'response':results})
     except:

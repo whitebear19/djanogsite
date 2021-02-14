@@ -48,66 +48,77 @@
 					</div>
 					<!--search-bar end-->
 					<nav class="">
-						<ul>		
-                     <li class="sub_menu_item sub_menu_item_ticket">
-								<a href="{% url 'ticket:dashboard' %}" title="" class="not-box-openm pos_rel">
-                           <span class="badge badge-danger badge-counter"></span>
-									<span><i class="fas fa-ticket-alt"></i></span>
-									Ticket
-								</a>
-                     </li>
-                     <li class="sub_menu_item sub_menu_item_data">
-								<a href="{% url 'data:dashboard' %}" title="" class="not-box-openm pos_rel">
-                           <span class="badge badge-danger badge-counter"></span>
-									<span><i class="fas fa-database"></i></span>
-									Data
-								</a>
-							</li>
-							<li class="sub_menu_item sub_menu_item_messages">
-								<a href="/messages" title="" class="not-box-openm pos_rel">
-                           <span class="badge badge-danger badge-counter cnt_msg"></span>
-									<span><i class="fas fa-envelope"></i></span>
-									Messages
-								</a>
-								<div class="notification-box msg" id="message">
-									<div class="nt-title">
-										<h4>Setting</h4>
-										<a title="" class="btn_clear_message_alert">Clear all</a>
-									</div>
-									<div class="nott-list">
-										<div class="nott-inner new_message_list new_message_list_nav">
-											                                 										
-										</div>
-										<div class="view-all-nots">
-											<a href="/messages" title="">View
-												All Messsages</a>
-										</div>
-									</div>
-									<!--nott-list end-->
-								</div>
-								<!--notification-box end-->
-                     </li>
-                     <li class="sub_menu_item sub_menu_item_contract">
-								<a href="{% url 'contract:dashboard' %}" title="" class="not-box-openm pos_rel">
-                           <span class="badge badge-danger badge-counter"></span>
-									<span><i class="fas fa-file-contract"></i></span>
-									Contract
-								</a>
-							</li>
-							<li class="sub_menu_item sub_menu_item_checkout">
-								<a href="{% url 'payment:dashboard' %}" title="" class="not-box-openm pos_rel">
-                           <span class="badge badge-danger badge-counter"></span>
-									<span><i class="fas fa-shopping-cart"></i></span>
-									Checkout
-								</a>
-							</li>
+						<ul>	
+                     {% if user.is_authenticated %}	
+                        <li class="sub_menu_item sub_menu_item_ticket">
+                           <a href="{% url 'ticket:dashboard' %}" title="" class="not-box-openm pos_rel">
+                              <span class="badge badge-danger badge-counter"></span>
+                              <span><i class="fas fa-ticket-alt"></i></span>
+                              Ticket
+                           </a>
+                        </li>
+                        <li class="sub_menu_item sub_menu_item_data">
+                           <a href="{% url 'data:dashboard' %}" title="" class="not-box-openm pos_rel">
+                              <span class="badge badge-danger badge-counter"></span>
+                              <span><i class="fas fa-database"></i></span>
+                              Data
+                           </a>
+                        </li>
+                        <li class="sub_menu_item sub_menu_item_messages">
+                           <a href="#" title="" class="not-box-openm pos_rel">
+                              <span class="badge badge-danger badge-counter cnt_msg"></span>
+                              <span><i class="fas fa-envelope"></i></span>
+                              Messages
+                           </a>
+                           <div class="notification-box msg" id="message">
+                              <div class="nt-title">
+                                 <h4>Setting</h4>
+                                 <a title="" class="btn_clear_message_alert">Clear all</a>
+                              </div>
+                              <div class="nott-list">
+                                 <div class="nott-inner new_message_list new_message_list_nav">
+                                                                                                   
+                                 </div>
+                                 <div class="view-all-nots">
+                                    <a href="/messages" title="">View
+                                       All Messsages</a>
+                                 </div>
+                              </div>
+                              <!--nott-list end-->
+                           </div>
+                           <!--notification-box end-->
+                        </li>
+                        <li class="sub_menu_item sub_menu_item_contract">
+                           <a href="{% url 'contract:dashboard' %}" title="" class="not-box-openm pos_rel">
+                              <span class="badge badge-danger badge-counter"></span>
+                              <span><i class="fas fa-file-contract"></i></span>
+                              Contract
+                           </a>
+                        </li>
+                        <li class="sub_menu_item sub_menu_item_checkout">
+                           <a href="{% url 'payment:dashboard' %}" title="" class="not-box-openm pos_rel">
+                              <span class="badge badge-danger badge-counter"></span>
+                              <span><i class="fas fa-shopping-cart"></i></span>
+                              Checkout
+                           </a>
+                        </li>
+                     {% else %}
+                        <li class="sub_menu_item sub_menu_item_checkout">
+                           <a href="/login" title="" class="not-box-openm pos_rel">
+                              <span class="badge badge-danger badge-counter"></span>
+                              <span><i class="fas fa-sign-in-alt"></i></span>
+                              Login
+                           </a>
+                        </li>
+                     {% endif %}
 						</ul>
 					</nav>
 					<!--nav end-->
 					<div class="menu-btn">
 						<a href="#" title=""><i class="fa fa-bars"></i></a>
 					</div>
-					<!--menu-btn end-->
+               <!--menu-btn end-->
+               {% if user.is_authenticated %}	
 					<div class="user-account">
 						<div class="user-info">
                     
@@ -141,7 +152,8 @@
                      </h3>
 						</div>
 						<!--user-account-settingss end-->
-					</div>
+               </div>
+               {% endif %}
 				</div>
 				<!--header-data end-->
 			</div>
@@ -150,7 +162,49 @@
       {% block content %}
                     
       {% endblock %}
-		
+      
+      <footer>
+         <div class="container">
+            <div class="row">
+               <div class="col-md-6">
+                  <ul>
+                     <li>
+                        <a href="{% url 'account:terms' %}" style="line-height: 44px;">Terms and condition</a>
+                     </li>
+                  </ul>
+                  
+               </div>
+               <div class="col-md-6 text-right">
+                  <ul class="followus_wrap">
+                     <li>
+                        <a href="">
+                           <i class="fab fa-linkedin"></i>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="">
+                           <i class="fab fa-twitter-square"></i>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="">
+                           <i class="fab fa-facebook"></i>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="">
+                           <i class="fab fa-instagram"></i>
+                        </a>
+                     </li>
+                  </ul>
+                  
+                  
+                  
+                  
+               </div>
+            </div>
+         </div>
+      </footer>
 		<div class="chatbox-list contact_list_global d-none">
 			<div class="chatbox">
 				<div class="chat-mg bx">
@@ -293,6 +347,7 @@
             type: 'json',                      
             success: function (response) {
                var data = response.messages;
+               var cnt_msg=0;
                for(var i=0;i<data.length;i++)
                {
                   var html=`
@@ -446,21 +501,19 @@
          {
             
             html +=`
-               <div class="main-message-box ta-right" data-mid="">
+               <div class="main-message-box message_item ta-right" data-mid="">
                   <div class="message-dt">
                      <div class="message-inner-dt">
                         <p>
                            ${message}
                         </p>
-                     </div>
-                     <span>${time}</span>
+                     </div>                     
                   </div>
                   <div class="messg-usr-img">
                      <img src="${cur_user_avatar_url}" alt="" class="mCS_img_loaded">
                   </div>
                </div>
             `;
-
 
             $('.chat_item_content_message').append(html);
             $(".send_message_global_message").val("");
@@ -506,6 +559,7 @@
                data: {room_id:$("#room_id_global").val()},                       
                success: function (response) {
                   var messages = response.messages;
+                  
                   for(var j=0;j<messages.length;j++)
                   {
                         var checked = true;
@@ -520,18 +574,17 @@
                            
                            var html = "";
                            if(messages[j].me=="0")
-                           {
+                           {                              
                               if(page_where)
                               {
                                  html +=`
-                                 <div class="main-message-box st3" data-mid="${messages[j].message_id}">
+                                 <div class="main-message-box message_item st3" data-mid="${messages[j].message_id}">
                                     <div class="message-dt st3">
                                        <div class="message-inner-dt">
                                           <p title="${messages[j].created_at} ago">
                                              ${messages[j].message}
                                           </p>
-                                       </div>
-                                       <span>${messages[j].time}</span>
+                                       </div>                                       
                                     </div>
                                     <div class="messg-usr-img">`;
                                     if(messages[j].avatar=="")
@@ -546,6 +599,7 @@
                               html +=`</div>
                                  </div>
                               `;
+                                 $('.chat_item_content_message').append(html);  
                               }
                               else
                               {
@@ -570,7 +624,7 @@
                               if(page_where)
                               {
                                  html +=`
-                                    <div class="main-message-box ta-right" data-mid="${messages[j].message_id}">
+                                    <div class="main-message-box message_item ta-right" data-mid="${messages[j].message_id}">
                                        <div class="message-dt">
                                           <div class="message-inner-dt">
                                              <p title="${messages[j].created_at} ago">
@@ -666,14 +720,13 @@
                         if(page_where)
                         {
                            html +=`
-                              <div class="main-message-box st3" data-mid="${messages[j].message_id}">
+                              <div class="main-message-box message_item st3" data-mid="${messages[j].message_id}">
                                  <div class="message-dt st3">
                                     <div class="message-inner-dt">
                                        <p title="${messages[j].created_at} ago">
                                           ${messages[j].message}
                                        </p>
-                                    </div>
-                                    <span>${messages[j].time}</span>
+                                    </div>                                    
                                  </div>
                                  <div class="messg-usr-img">`;
                                  if(messages[j].avatar=="")
@@ -721,14 +774,13 @@
                         if(page_where)
                         {
                            html +=`
-                              <div class="main-message-box ta-right" data-mid="${messages[j].message_id}">
+                              <div class="main-message-box message_item ta-right" data-mid="${messages[j].message_id}">
                                  <div class="message-dt">
                                     <div class="message-inner-dt">
                                        <p title="${messages[j].created_at} ago">
                                           ${messages[j].message}
                                        </p>
-                                    </div>
-                                    <span>${messages[j].time}</span>
+                                    </div>                                   
                                  </div>
                                  <div class="messg-usr-img">
                                     <img src="`;
@@ -839,9 +891,9 @@
          page_init();
        
          setInterval(function(){                 
-            // get_new_message_global();               
-            // get_new_message();
-            // get_all_room();
+            get_new_message_global();               
+            get_new_message();
+            get_all_room();
             
             
          }, 2000);
@@ -866,6 +918,8 @@
             var username = $(this).data('username');  
             var status = $(this).data('status');
             
+            $(".chat_item_content_message").attr("data-room",rid)
+
             $(".btn_room_item").removeClass('active');
             $(this).addClass("active");
             $("#room_id_global").val(rid);

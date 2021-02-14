@@ -9,6 +9,8 @@ urlpatterns = [
     path('register',view=views.register_custom, name='register'),
    
     path('home',view=views.home, name='home'),
+    path('terms',view=views.terms, name='terms'),
+    path('',view=views.home, name='home'),
     path('profile',view=views.profile, name='profile'),
     path('check_register',view=views.check_register, name='check_register'),
     path('check_login',view=views.check_login, name='check_login'),
@@ -21,4 +23,5 @@ urlpatterns = [
     # ajax
     path('upload_avatar',view=views.upload_avatar, name='upload_avatar'), 
     path('store_basicinfo',view=views.store_basicinfo, name='store_basicinfo'),
+    path('get_phoneCode',view=views.get_phoneCode, name='get_phoneCode'),
 ]

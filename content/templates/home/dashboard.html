@@ -6,11 +6,25 @@
     {% block head %}
     <title>Home | My Domain</title>
     {% endblock %}
+    <section class="cover-sec">
+        <div class="embed-responsive">
+            <img class="embed-responsive-item" src="{% static 'images/banner.jpg' %}" alt="" />
+        </div>
+       
+    </section>
     <main>
         <div class="main-section">
             <div class="container">
                 <div class="main-section-data">
                     <div class="row">
+                        <div class="col-lg-6">
+                            <img src="{% static 'images/no_banner.png' %}" alt="">
+                        </div>
+                        <div class="col-lg-6">
+                            <h3>
+                                This is my company text
+                            </h3>
+                        </div>
                         <div class="col-lg-3 col-md-4 pd-left-none no-pd">
                             <div class="main-left-sidebar left-sidebar-fixed no-margin">
                                 

@@ -13,10 +13,16 @@ class CustomUser(AbstractUser):
     avatar = models.ImageField(upload_to='avatar',default='', null=True)
     back = models.ImageField(upload_to='back',default='', null=True)
     gender = models.CharField(max_length=20,default='', null=True)
-    location = models.CharField(max_length=250,default='', null=True)
-      
-    phone = models.CharField(max_length=250,default='', null=True)
-    phone_code = models.CharField(max_length=250,default='', null=True)
+    professional = models.CharField(max_length=20,default='', null=True)
+    professional = models.CharField(max_length=20,default='', null=True)
+    address = models.CharField(max_length=250,default='', null=True)      
+    city = models.CharField(max_length=50,default='', null=True)      
+    zipcode = models.CharField(max_length=10,default='', null=True)      
+    company = models.CharField(max_length=50,default='', null=True)      
+    phone = models.CharField(max_length=20,default='', null=True)
+    phone_code = models.CharField(max_length=5,default='', null=True)
+    tel_fix = models.CharField(max_length=50,default='', null=True)
+    siret = models.CharField(max_length=50,default='', null=True)
      
     created_at = models.DateTimeField(auto_now_add=True,blank=True)
 

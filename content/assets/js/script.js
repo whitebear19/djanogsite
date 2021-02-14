@@ -28,7 +28,7 @@ $(window).on('load', function () {
   'use strict';
 
   $(
-    '.chat-list,.messages-line, .suggestions-inner, .nott-list .nott-inner, .pf-gallery, .custom-invite-list, .jobs-list-inner, .messages-list'
+    '.chat-list, .suggestions-inner, .nott-list .nott-inner, .pf-gallery, .custom-invite-list, .jobs-list-inner, .messages-list'
   ).mCustomScrollbar({
     axis: 'y',
     theme: 'dark',

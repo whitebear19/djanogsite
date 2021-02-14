@@ -165,13 +165,12 @@ def index(request):
         return redirect('/home')
 
 def home(request):
-    
-    user = request.user 
-    if not request.user.is_authenticated:
-        return redirect('/login')
-       
-    
+           
     return render(request,'home/dashboard.html',{}) 
+
+def terms(request):
+           
+    return render(request,'home/terms.html',{}) 
 
 def profile(request):
     user = request.user 
@@ -185,7 +184,7 @@ def profile(request):
 def logout(request):
     if request.method == 'POST':
         auth_views.auth_logout(request)
-    return redirect('/login')
+    return redirect('/home')
 
 def messages(request): 
     if not request.user.is_authenticated:
@@ -238,6 +237,18 @@ def store_basicinfo(request):
         
         return JsonResponse({'response':result})
 
+def get_phoneCode(request):
+    code = ''
+    # ipaddress = get_client_ip(request) 
+    ipaddress = '188.43.235.177'
+    geo_info = get_geolocation_for_ip(ipaddress)
+    results=json.dumps(geo_info) 
+    results=json.loads(results)
+    if results['country_code']:
+        code = results['country_code']
+    else:
+        code = 'us'
+    return JsonResponse({'results':code})
 
 def check_login(request):
     email = request.POST.get('email').replace(" ", "")
@@ -280,49 +291,50 @@ def check_login(request):
             return JsonResponse({'results':results}) 
 
 def check_register(request):    
-    try:
-        firstname = request.POST.get('firstname').replace(" ", "")
-        lastname = request.POST.get('lastname').replace(" ", "")
-        email = request.POST.get('email').replace(" ", "")
-        phone = request.POST.get('phone').replace(" ", "")
-       
-        password = request.POST.get('password1')
+    # try:
+    firstname = request.POST.get('firstname').replace(" ", "")
+    lastname = request.POST.get('lastname').replace(" ", "")
+    email = request.POST.get('email').replace(" ", "")
+    phone = request.POST.get('phone').replace(" ", "")
+    phonecode = request.POST.get('phonecode')
+    
+    password = request.POST.get('password1')
 
-        which = request.POST.get('which')
-        if which == 'phone':
-            is_phone = CustomUser.objects.filter(phone=phone).count()
-            is_email = 0
-        else:
-            is_phone = 0
-            is_email = CustomUser.objects.filter(email=email).count()
+    professional = request.POST.get('professional')
+    address = request.POST.get('address')
+    city = request.POST.get('city')
+    zipcode = request.POST.get('zipcode')
+    company = request.POST.get('company')
+    tel_fix = request.POST.get('tel_fix')
+    siret = request.POST.get('siret')
+    which = request.POST.get('which')
+    if which == 'phone':
+        is_phone = CustomUser.objects.filter(phone=phone).count()
+        is_email = 0
+    else:
+        is_phone = 0
+        is_email = CustomUser.objects.filter(email=email).count()
 
-        results = {}
-        results['is_phone'] = is_phone
-        results['is_email'] = is_email
-        results['which'] = which
+    results = {}
+    results['is_phone'] = is_phone
+    results['is_email'] = is_email
+    results['which'] = which
+    
         
-         
 
-        if is_phone > 0 or is_email > 0:
-            return JsonResponse({'results':results})
-        else:      
-            if which == 'phone':
-                row = CustomUser(password=make_password(password),username=datetime.datetime.now().strftime("%m%d%Y%H%M%S"),is_superuser=0,is_staff=0,is_active=1,first_name=firstname,last_name=lastname,phone=phone)
-                row.save()   
-                user = authenticate(username=row.username,password=password)
-                login(request, user)                
-                
+    if is_phone > 0 or is_email > 0:
+        return JsonResponse({'results':results})
+    else:      
+        
+        row = CustomUser(password=make_password(password),username=datetime.datetime.now().strftime("%m%d%Y%H%M%S"),is_superuser=0,is_staff=0,is_active=1,first_name=firstname,last_name=lastname,email=email,phone=phone,phone_code=phonecode,professional=professional,address=address,city=city,zipcode=zipcode,company=company,tel_fix=tel_fix,siret=siret)
+        row.save()  
+        user = authenticate(username=row.username,password=password)
+        login(request, user)
             
-            else:
-                row = CustomUser(password=make_password(password),username=datetime.datetime.now().strftime("%m%d%Y%H%M%S"),is_superuser=0,is_staff=0,is_active=1,first_name=firstname,last_name=lastname,email=email)
-                row.save()  
-                user = authenticate(username=row.username,password=password)
-                login(request, user)
-               
 
-            return JsonResponse({'results':results})
-    except:
-        return JsonResponse({'results':False})
+        return JsonResponse({'results':results})
+    # except:
+    #     return JsonResponse({'results':False})
 
 
 def close_account(request):

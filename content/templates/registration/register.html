@@ -8,26 +8,69 @@
         <form action="" id="form_register" method="POST">
         {% csrf_token %} 
             <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label class="radio_container mr-3">Professional
+                        <input type="radio" checked="checked" name="professional" value="1">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio_container">Or not
+                        <input type="radio" name="professional" value="0">
+                        <span class="checkmark"></span>
+                    </label>    
+                </div>                
+            </div>
+            <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="exampleFormControlInput1">First name</label>
-                    <input type="text" class="form-control required" name="firstname" placeholder="Ex.Ramana">
+                    <label for="">First name</label>
+                    <input type="text" class="form-control required" name="firstname" placeholder="Ex.David">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="exampleFormControlInput1">Last name</label>
-                    <input type="text" class="form-control required" name="lastname" placeholder="Ex.Gude">
+                    <label for="">Last name</label>
+                    <input type="text" class="form-control required" name="lastname" placeholder="Ex.Well">
                 </div>
             </div>
            
-            <div class="form-group form_warp_phone form_warp d-none">
-                <label for="exampleFormControlInput1">Phone</label> 
-                <input id="phone" class="form-control" name="phone" type="tel">
-                <button class="btn_switch_email_phone" data-type="phone" type="button">Use an email instead</button>
-            </div>
+           
             <div class="form-group form_warp_email form_warp ">
-                <label for="exampleFormControlInput1">Email</label> 
-                <input id="" class="form-control" name="email" type="email">
+                <label for="">Email</label> 
+                <input id="" class="form-control required" name="email" type="email" placeholder="yourmail@mail.com">
                
             </div>
+            <div class="form-group form_warp_phone form_warp">
+                <label for="">Full address(street)</label> 
+                <input class="form-control required" name="address" type="text" maxlength="80" placeholder="Blk 293D Bukit Batok Street 21">                
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="exampleFormControlInput1">City</label>
+                    <input type="text" class="form-control required" maxlength="50" name="city" placeholder="London">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="exampleFormControlInput1">Postal code</label>
+                    <input type="text" class="form-control required" maxlength="7" name="zipcode" placeholder="12654">
+                </div>
+            </div>
+            <div class="form-group form_warp_phone form_warp">
+                <label for="">Company Name</label> 
+                <input class="form-control required" name="company" type="text" maxlength="50" placeholder="company name">                
+            </div>
+           
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                   <label for="">Company Tel</label> 
+                    <input id="phone" class="form-control required" name="phone" maxlength="20" type="tel" placeholder="1231321234">  
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">Company Tel Fix</label> 
+                    <input class="form-control required" name="tel_fix" type="text" maxlength="50" placeholder="">     
+                </div>
+            </div>
+            <div class="form-group form_warp_phone form_warp">
+                <label for="">N° Siret</label> 
+                <input class="form-control required" name="siret" type="text" maxlength="50" placeholder="">                
+            </div>
+
             <div class="form-group">
                 <p class="alert_email alert_txt">Email already registered. Please login</p>
                 <p class="alert_phone alert_txt">Phone number already registered. Please login</p>
@@ -47,13 +90,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <span>You agree to the Flicker face <a href="#">terms of use</a>, <a href="#">privacy
+                <span>You agree to the  <a href="#">terms of use</a>, <a href="#">privacy
                         policies</a> and
                     <a href="#">cookies policy</a>.</span>
             </div>
             <button type="button" class="btn btn-primary btn-block font-weight-bold btn_register"> Agree & Join
             </button>      
-            <input type="hidden" name="which" value="phone">     
+            <input type="hidden" name="which" value="email">     
             <input type="hidden" name="phoneCode" value="">     
         </form>
         <div class="text-center text-md-left mt-3">
@@ -73,7 +116,20 @@
         function init()
         {            
             
-             
+            $.ajax({
+                url: "{% url 'account:get_phoneCode' %}",
+                method: 'get', 
+                type: 'json',     
+                success: function (response) {       
+                    phoneCode = response.results;  
+                    var input = document.querySelector("#phone");
+                    window.intlTelInput(input, {                    
+                    formatOnDisplay: false,                   
+                    preferredCountries: [phoneCode],                    
+                });                  
+                }
+            });
+            
         }
         
         $(document).ready(function(){    
@@ -86,11 +142,7 @@
                 $(this).removeClass('alertborder');
             });
             $(document).on('click','.btn_register',function()
-            {      
-                var currentdate = new Date();      
-                var curYear = currentdate.getFullYear();    
-                var putedYear = $('select[name="birthYear"]').val()                 
-                
+            {  
                 var checkvalid = true;       
                 $(".required").each(function(){
                     if($(this).val() == "")
@@ -99,43 +151,24 @@
                         checkvalid = false;
                     }
                 });
-                if((parseInt(curYear)-parseInt(putedYear)) < 14)
-                {
-                    checkvalid = false;                    
-                    swal({
-                        title: "You can not signup!",  
-                        text: "You should be more than 14.",                                               
-                        type: "error"
-                    }).then(function() {
-                        return false;
-                    }); 
-                }
+               
                 var is_email = isEmail($('input[name="email"]').val());
                 var is_phone = isNumber($('input[name="phone"]').val());
                 
-                if(is_phone)
+                
+                if($('input[name="phone"]').val().length < 9 || $('input[name="phone"]').val().length > 14)
                 {
-                    if($('input[name="phone"]').val().length < 9 || $('input[name="phone"]').val().length > 14)
-                    {
-                        $('input[name="phone"]').addClass("alertborder");
-                        return false;
-                    }
-                    else{
-                        $('input[name="which"]').val('phone');
-                        var phoneCode = $(".iti__selected-flag").attr("title").split("+")[1];
-                        $('input[name="phoneCode"]').val(phoneCode);
-                        
-                    }
+                    $('input[name="phone"]').addClass("alertborder");
+                    return false;
+                }
+                else{
+                    
+                    var phoneCode = $(".iti__selected-flag").attr("title").split("+")[1];
+                    $('input[name="phoneCode"]').val(phoneCode);
                     
                 }
-                else if(is_email)
-                {
-                    $('input[name="which"]').val('email');
-                }
-                else
-                {                    
-                    $(".alert_both").css('display','block');
-                }
+                   
+                
                 var password1 = $('input[name="password1"]').val();
                 var password2 = $('input[name="password2"]').val();       
                
@@ -164,10 +197,7 @@
                 
                 if(checkvalid)
                 {                 
-                    if($('input[name="which"]').val()=="")
-                    {
-                        location.reload();
-                    }
+                   
                     var data = $('#form_register').serialize();
                     $("#loading").css("display","flex");
                     $.ajax({
@@ -201,16 +231,31 @@
                             }
                             else
                             {
-                                swal({
-                                    title: "Successfully registered!",  
-                                    text: "We have sent verify code.Please check your "+data.which+" and verify your account.",                                               
-                                    type: "success"
-                                }).then(function() {
-                                    var cur_url = window.location.href.replace('register', 'login');                       
-                                    window.location.replace(cur_url);
-                                });
-                                
+                                if(!data)
+                                {
+                                    swal({
+                                        title: "Something wrong!",  
+                                        text: "Please try again.",                                               
+                                        type: "error"
+                                    }).then(function() {
+                                        
+                                    });
+                                }
+                                else
+                                {
+                                    swal({
+                                        title: "Successfully registered!",  
+                                        text: "",                                               
+                                        type: "success"
+                                    }).then(function() {
+                                        var cur_url = window.location.href.replace('register', 'home');                       
+                                        window.location.replace(cur_url);
+                                    });
+                                }                                
                             }
+                        },
+                        error: function(response){
+                            $("#loading").css("display","none");
                         }
                     });
                 }
@@ -241,6 +286,21 @@
                 }
             });
             
+            $('input[name=professional]').change(function(){
+                var value = $('input[name=professional]:checked').val();
+                if(value == "1")
+                {
+                    $("input[name='company']").addClass("required");
+                    $("input[name='tel_fix']").addClass("required");
+                    $("input[name='siret']").addClass("required");
+                }
+                else
+                {
+                    $("input[name='company']").removeClass("required");
+                    $("input[name='tel_fix']").removeClass("required");
+                    $("input[name='siret']").removeClass("required");
+                }
+            });
         });
     </script>
 {% endblock %}

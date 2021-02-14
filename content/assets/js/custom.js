@@ -13,7 +13,7 @@ jQuery(function ($) {
     function init_menu()
     {
         var cur_url = window.location.href;      
-        console.log(cur_url);
+       
         if (cur_url.indexOf("contract") >= 0)
         {   
             $(".sub_menu_item_contract").addClass("selected_sub_menu");
@@ -146,6 +146,102 @@ jQuery(function ($) {
             });
         }            
     });
+
+    // ---------------------------Contract Part---------------------------------
+    
+    $(document).on('click','.btn_store_contract',function(){
+        var is_checked = true;
+        $('.new_data_form .required').each(function(){
+            if($(this).val()=="")
+            {
+                $(this).addClass('alert-border');
+                is_checked = false;
+            }
+        });     
+       
+        if(is_checked)
+        {
+            var data = $('.new_contract_form').serialize();
+            $("#loading").css("display","block");
+            $.ajax({                
+                url:"/contract/store",
+                type: 'post',
+                dataType: 'json',
+                data: data,
+
+                success: function(result){                    
+                    $("#loading").css("display","none");
+                    var data = result.response;
+                    if(data)
+                    {                            
+                        swal({
+                            title: "Successfully stored!",                     
+                            type: "success"
+                        }).then(function() {
+                            location.reload();
+                        });
+                    }
+                    else
+                    {
+                        swal({
+                            title: "Something wrong!",                     
+                            text: "Please try again",
+                            type: "error"
+                        }).then(function() {
+                            // location.reload();
+                        });
+                    }
+                    
+                
+                }
+            });
+        }            
+    });
+    $(document).on('click','.btn_accept',function()
+    {
+        var id = $(this).data("id");
+        $("#loading").css("display","block");
+        $.ajax({                
+            url:"/contract/accept",
+            type: 'get',
+            dataType: 'json',
+            data: {id:id},
+
+            success: function(result){                    
+                $("#loading").css("display","none");
+                var data = result.results;
+                if(data)
+                {                            
+                    swal({
+                        title: "Successfully accepted!",                     
+                        type: "success"
+                    }).then(function() {
+                        location.reload();
+                    });
+                }
+                else
+                {
+                    swal({
+                        title: "Something wrong!",                     
+                        text: "Please try again",
+                        type: "error"
+                    }).then(function() {
+                        location.reload();
+                    });
+                } 
+            },
+            error: function(result){
+                swal({
+                    title: "Something wrong!",                     
+                    text: "Please try again",
+                    type: "error"
+                }).then(function() {
+                    // location.reload();
+                });
+            }
+        });
+    });
+    
 });
 
 

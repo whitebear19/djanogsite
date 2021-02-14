@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-9">
                             <div class="main-ws-sec">
                                 <div class="uc-tabs-content current animated fadeIn">
                                     <ul class="nav nav-tabs nav-fill border bg-white" role="tablist">                                       
@@ -40,7 +40,17 @@
                                             <a class="tab_user_profile nav-link py-3 active" data-tab="basic-info" id="basic-info-tab" data-toggle="tab"
                                                 href="#basic-info" role="tab" aria-controls="basic-info"
                                                 aria-selected="true">Basic Info</a>
-                                        </li>                                        
+                                        </li>    
+                                        <li class="nav-item">
+                                            <a class="tab_user_profile nav-link py-3" data-tab="current_contract" id="current-contract-tab" data-toggle="tab"
+                                                href="#current_contract" role="tab" aria-controls="current_contract"
+                                                aria-selected="true">Current Contract</a>
+                                        </li>     
+                                        <li class="nav-item">
+                                            <a class="tab_user_profile nav-link py-3" data-tab="past_contract" id="past-contract-tab" data-toggle="tab"
+                                                href="#past_contract" role="tab" aria-controls="past_contract"
+                                                aria-selected="true">Past Contract</a>
+                                        </li>                                       
                                     </ul>
                                     <div class="tab-content">                                        
                                        
@@ -92,16 +102,81 @@
                                                 </div>
                                             </div>
                                         </div>
-                                       
+                                        <div class="tab-pane tab_pane_user_profile fade" id="current_contract" role="tabpanel"
+                                        aria-labelledby="contract">
+                                            <div class="user-profile-ov">
+                                                <div class="mt-2">
+                                                    <table id="data_result_current" class="data_result table">
+                                                        <thead>
+                                                            <tr>
+                                                                <td style="width:20px;" align="center">
+                                                                    No
+                                                                </td>
+                                                                <td align="center">
+                                                                    Delivery Proposal Number
+                                                                </td>
+                                                                <td align="center">
+                                                                    Address
+                                                                </td>
+                                                                <td align="center">
+                                                                    City
+                                                                </td>
+                                                                <td align="center">
+                                                                    Date
+                                                                </td>
+                                                                <td align="center">
+                                                                    Volume
+                                                                </td>
+                                                               
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="data_result_row_current">
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                </div>                                       
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane tab_pane_user_profile fade" id="past_contract" role="tabpanel"
+                                        aria-labelledby="contract">
+                                            <div class="user-profile-ov">
+                                                <div class="mt-2">
+                                                    <table id="data_result_past" class="data_result table">
+                                                        <thead>
+                                                            <tr>
+                                                                <td style="width:20px;" align="center">
+                                                                    No
+                                                                </td>
+                                                                <td align="center">
+                                                                    Delivery Proposal Number
+                                                                </td>
+                                                                <td align="center">
+                                                                    Address
+                                                                </td>
+                                                                <td align="center">
+                                                                    City
+                                                                </td>
+                                                                <td align="center">
+                                                                    Date
+                                                                </td>
+                                                                <td align="center">
+                                                                    Volume
+                                                                </td>
+                                                                
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="data_result_row_past">
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                </div>                                         
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3">
-                            <div class="right-sidebar">
-                               
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -194,8 +269,52 @@
     </div>
     
     <script>
+        function get_contract()
+        {
+            $("#loading").css("display","flex");
+            $.ajax({                
+                url:"/contract/get_contract_user",
+                type: 'get',
+                dataType: 'json',                
+
+                success: function(result){                    
+                    $("#loading").css("display","none");
+                    var data = result.results;
+                    
+                    $(".data_result_row").html("");
+                    if(data.length > 0)
+                    {
+                        for (let index = 0; index < data.length; index++) {
+                            
+                            var html = `
+                                <tr>
+                                    <td>${index+1}</td>
+                                    <td>${data[index].c_num}</td>
+                                    <td>${data[index].address}</td>
+                                    <td>${data[index].city}</td>
+                                    <td>${data[index].date}</td>
+                                    <td>${data[index].volume}</td>
+                                </tr>
+                            `;
+                            if(data[index].accepted == "1")
+                            {
+                                $(".data_result_row_past").append(html);
+                            }
+                            else
+                            {
+                                $(".data_result_row_current").append(html);
+                            }  
+                        }
+                        
+                    }  
+                    $('#data_result_current').DataTable();     
+                    $('#data_result_past').DataTable();     
+                }
+            });
+        }
         $(document).ready(function()
         {
+            get_contract();
             $(document).on('change','#editUserAvatar',function(){
                 var file = document.getElementById('editUserAvatar');
                 var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
@@ -233,9 +352,7 @@
                         location.reload();
                     }
                 });
-            });
-
-                        
+            });       
         });
     </script>
  
