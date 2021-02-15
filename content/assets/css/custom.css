@@ -702,6 +702,10 @@ border: 3px solid #3f3f3f;
     .table{
         width: 100%!important;
     }
+    .item-h-30
+    {
+        height: 30px;
+    }
 /* ----------------------------------------------------- */
 
 @media(max-width:1200px)

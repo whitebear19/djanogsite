@@ -151,7 +151,7 @@ jQuery(function ($) {
     
     $(document).on('click','.btn_store_contract',function(){
         var is_checked = true;
-        $('.new_data_form .required').each(function(){
+        $('.new_contract_form .required').each(function(){
             if($(this).val()=="")
             {
                 $(this).addClass('alert-border');
@@ -196,6 +196,9 @@ jQuery(function ($) {
                 }
             });
         }            
+    });
+    $(document).on('click','.btn_toggle_intermediary',function(){
+        $(".intermediary_wrap").toggle('slow');
     });
     $(document).on('click','.btn_accept',function()
     {

@@ -48,9 +48,14 @@ def insert(request):
     user = request.user 
     if not request.user.is_authenticated:
         return redirect('/login')
-       
-    
-    return render(request,'contract/insert.html',{}) 
+    else:
+        if user.verified == "0":
+            return redirect('/confirm')
+        else:            
+            if user.professional != "1":
+                return redirect('/contract/dashboard')
+            else:
+                return render(request,'contract/insert.html',{}) 
 
 # ajax
 def store(request):               
@@ -131,10 +136,25 @@ def get_contract(request):
         data['id'] = item.id
         data['me'] = me
         data['c_num'] = item.c_num
-        data['address'] = item.d_address       
-        data['city'] = item.d_city  
-        data['date'] = item.d_date
+        data['d_address'] = item.d_address       
+        data['d_city'] = item.d_city  
+        data['d_date'] = item.d_date
+        data['d_zipcode'] = item.d_zipcode
+        data['e_address'] = item.e_address       
+        data['e_city'] = item.e_city  
+        data['e_date'] = item.e_date
+        data['e_zipcode'] = item.e_zipcode
+        data['i1_address'] = item.i1_address       
+        data['i1_city'] = item.i1_city  
+        data['i1_date'] = item.i1_date
+        data['i1_zipcode'] = item.i1_zipcode
+        data['i2_address'] = item.i2_address       
+        data['i2_city'] = item.i2_city  
+        data['i2_date'] = item.i2_date
+        data['i2_zipcode'] = item.i2_zipcode
         data['volume'] = volume
+        username = CustomUser.objects.get(id=item.user_id).first_name + " " + CustomUser.objects.get(id=item.user_id).last_name
+        data['username'] = username
         results.append(data)
     return JsonResponse({'results':results})
 

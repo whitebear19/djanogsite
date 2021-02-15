@@ -57,6 +57,7 @@
                               Ticket
                            </a>
                         </li>
+                        {% if user.professional == "1" %}
                         <li class="sub_menu_item sub_menu_item_data">
                            <a href="{% url 'data:dashboard' %}" title="" class="not-box-openm pos_rel">
                               <span class="badge badge-danger badge-counter"></span>
@@ -64,6 +65,7 @@
                               Data
                            </a>
                         </li>
+                        {% endif %}
                         <li class="sub_menu_item sub_menu_item_messages">
                            <a href="#" title="" class="not-box-openm pos_rel">
                               <span class="badge badge-danger badge-counter cnt_msg"></span>
@@ -133,7 +135,9 @@
 						<div class="user-account-settingss" id="users" style="display: none;">
 							<h3>Setting</h3>
 							<ul class="us-links">
-								<li><a href="{% url 'account:profile' %}" title="">My Account</a></li>							
+								<li><a href="/profile?page=info" title="">My Account</a></li>							
+								<li><a href="/profile?page=past" title="">Past Contract</a></li>							
+								<li><a href="/profile?page=current" title="">Current Contract</a></li>							
 								
 								
 							</ul>

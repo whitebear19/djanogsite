@@ -23,7 +23,8 @@ class CustomUser(AbstractUser):
     phone_code = models.CharField(max_length=5,default='', null=True)
     tel_fix = models.CharField(max_length=50,default='', null=True)
     siret = models.CharField(max_length=50,default='', null=True)
-     
+    verified = models.CharField(max_length=1,default='0', null=True)
+    verified_code = models.CharField(max_length=6,default='', null=True)
     created_at = models.DateTimeField(auto_now_add=True,blank=True)
 
 

@@ -134,29 +134,74 @@ def send_code_email(email,code):
         subject = 'Email Verify Code' 
         html_message = render_to_string('email/verify.html', {'code': code})
         plain_message = strip_tags(html_message)
-        from_email = 'test.com'
+        from_email = 'welcome.com'
         send_mail(subject, plain_message, from_email, [email], html_message=html_message) 
         return True
     except:
         return False
+
+def verify_resend(request):
+    results = False
+    try:        
+        user = request.user
+        verified_code = str(random.randint(100000,999999))
+
+        
+        user.verified_code = verified_code            
+        user.save()            
+        send_code_email(user.email,verified_code) 
+        results = True
+        
+        return JsonResponse({'results':results,'which':'e','auth':True})
+    except:
+        return JsonResponse({'results':results,'which':"",'auth':False})
+
+
+
+def verify_confirm(request):
+    results = False
+    try:
+        code = request.POST.get('code')
+        user = request.user
+        if(user.verified_code == code):
+            user.verified = '1'
+            user.save()
+            results = True
+        else:
+            results = False
+        return JsonResponse({'results':results,'auth':True})
+    except:
+        return JsonResponse({'results':results,'auth':False})
+
 
 
 def login_custom(request):
     if not request.user.is_authenticated:
         return render(request,'registration/login.html')
     else:
-        user = request.user       
-        return redirect('/home')
+        user = request.user     
+        if user.verified == "0":
+            return redirect('/confirm')
+        else:
+            return redirect('/home')  
+        
     
 
 def register_custom(request):
     if not request.user.is_authenticated:
         return render(request,'registration/register.html') 
     else:
-        user = request.user
-        return redirect('/home')
+        user = request.user        
+        if user.verified == "0":
+            return redirect('/confirm')
+        else:
+            return redirect('/home')  
             
-
+def confirm(request):
+    if not request.user.is_authenticated:
+        return redirect('/login')
+    else:        
+        return render(request,'registration/confirm.html') 
 
 def index(request):
     if not request.user.is_authenticated:
@@ -177,8 +222,8 @@ def profile(request):
     if not request.user.is_authenticated:
         return redirect('/login')
        
-    
-    return render(request,'account/profile.html',{}) 
+    page = request.GET.get('page')
+    return render(request,'account/profile.html',{'page':page}) 
 
 # -------------------------------------------------------
 def logout(request):
@@ -190,8 +235,10 @@ def messages(request):
     if not request.user.is_authenticated:
         return redirect('/login')
     user = request.user
-    
-    return render(request,'data/messages.html',{}) 
+    if user.verified == "0":
+        return redirect('/confirm')
+    else:
+        return render(request,'data/messages.html',{}) 
 
 
 # ajax_part
@@ -247,7 +294,7 @@ def get_phoneCode(request):
     if results['country_code']:
         code = results['country_code']
     else:
-        code = 'us'
+        code = 'fr'
     return JsonResponse({'results':code})
 
 def check_login(request):
@@ -321,7 +368,7 @@ def check_register(request):
     results['which'] = which
     
         
-
+    verified_code = str(random.randint(100000,999999))
     if is_phone > 0 or is_email > 0:
         return JsonResponse({'results':results})
     else:      
@@ -330,7 +377,7 @@ def check_register(request):
         row.save()  
         user = authenticate(username=row.username,password=password)
         login(request, user)
-            
+        send_code_email(email,verified_code) 
 
         return JsonResponse({'results':results})
     # except:

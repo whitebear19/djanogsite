@@ -7,7 +7,7 @@ app_name = 'account'
 urlpatterns = [   
     path('login',view=views.login_custom, name='login'),
     path('register',view=views.register_custom, name='register'),
-   
+    path('confirm',view=views.confirm, name='confirm'),
     path('home',view=views.home, name='home'),
     path('terms',view=views.terms, name='terms'),
     path('',view=views.home, name='home'),
@@ -24,4 +24,6 @@ urlpatterns = [
     path('upload_avatar',view=views.upload_avatar, name='upload_avatar'), 
     path('store_basicinfo',view=views.store_basicinfo, name='store_basicinfo'),
     path('get_phoneCode',view=views.get_phoneCode, name='get_phoneCode'),
+    path('verify_confirm',view=views.verify_confirm, name='verify_confirm'),
+    path('verify_resend',view=views.verify_resend, name='verify_resend'),
 ]

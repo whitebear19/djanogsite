@@ -26,11 +26,11 @@
                                     {% csrf_token %}
                                         <div class="form-group">
                                             <label for="">User name</label>
-                                            <input type="text" name="name" value="{{ user.first_name }} {{ user.last_name }}" class="form-control required">
+                                            <input type="text" name="name" value="{{ user.first_name }} {{ user.last_name }}" readonly class="form-control required">
                                         </div>  
                                         <div class="form-group">
                                             <label for="">Transport</label>                                            
-                                            <select name="transport" class="form-control">
+                                            <select name="transport" class="form-control required">
                                                 <option value="">--- Select transport ---</option>
                                             </select>
                                         </div>  
@@ -65,39 +65,45 @@
                                         <div class="form-group">
                                             <label for="">Destination Time and Date</label>
                                             <input type="text" name="e_date" class="form-control required">
-                                        </div>  
+                                        </div> 
                                         <div class="form-group">
-                                            <label for="">Intermediary Address 1</label>
-                                            <input type="text" name="i1_address" class="form-control required">
-                                        </div>  
-                                        <div class="form-group">
-                                            <label for="">Intermediary City 1</label>
-                                            <input type="text" name="i1_city" class="form-control required">
-                                        </div>  
-                                        <div class="form-group">
-                                            <label for="">Intermediary Postal Code 1</label>
-                                            <input type="text" name="i1_zipcode" class="form-control required">
-                                        </div>  
-                                        <div class="form-group">
-                                            <label for="">Intermediary Time and Date 1</label>
-                                            <input type="text" name="i1_date" class="form-control required">
-                                        </div>  
-                                        <div class="form-group">
-                                            <label for="">Intermediary Address 2</label>
-                                            <input type="text" name="i2_address" class="form-control required">
-                                        </div>  
-                                        <div class="form-group">
-                                            <label for="">Intermediary City 2</label>
-                                            <input type="text" name="i2_city" class="form-control required">
-                                        </div>  
-                                        <div class="form-group">
-                                            <label for="">Intermediary Postal Code 2</label>
-                                            <input type="text" name="i2_zipcode" class="form-control required">
-                                        </div>  
-                                        <div class="form-group">
-                                            <label for="">Intermediary Time and Date 2</label>
-                                            <input type="text" name="i2_date" class="form-control required">
-                                        </div>  
+                                            <button type="button" class="btn_common_blue btn_toggle_intermediary">Add intermediary city</button>
+                                        </div> 
+                                        <div class="intermediary_wrap" style="display: none;">
+                                            <div class="form-group">
+                                                <label for="">Intermediary Address 1</label>
+                                                <input type="text" name="i1_address" class="form-control">
+                                            </div>  
+                                            <div class="form-group">
+                                                <label for="">Intermediary City 1</label>
+                                                <input type="text" name="i1_city" class="form-control">
+                                            </div>  
+                                            <div class="form-group">
+                                                <label for="">Intermediary Postal Code 1</label>
+                                                <input type="text" name="i1_zipcode" class="form-control">
+                                            </div>  
+                                            <div class="form-group">
+                                                <label for="">Intermediary Time and Date 1</label>
+                                                <input type="text" name="i1_date" class="form-control">
+                                            </div>  
+                                            <div class="form-group">
+                                                <label for="">Intermediary Address 2</label>
+                                                <input type="text" name="i2_address" class="form-control">
+                                            </div>  
+                                            <div class="form-group">
+                                                <label for="">Intermediary City 2</label>
+                                                <input type="text" name="i2_city" class="form-control">
+                                            </div>  
+                                            <div class="form-group">
+                                                <label for="">Intermediary Postal Code 2</label>
+                                                <input type="text" name="i2_zipcode" class="form-control">
+                                            </div>  
+                                            <div class="form-group">
+                                                <label for="">Intermediary Time and Date 2</label>
+                                                <input type="text" name="i2_date" class="form-control">
+                                            </div>  
+                                        </div> 
+                                        
                                         <div class="form-group text-center">
                                             <button type="button" class="btn_store_contract btn_common_blue">
                                                 Submit

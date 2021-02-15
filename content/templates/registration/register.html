@@ -104,7 +104,7 @@
         </div>
     </div>   
     <script>
-        var phoneCode = 'us';
+        var phoneCode = 'fr';
         function isEmail(email) {
             var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
             return regex.test(email);
@@ -121,12 +121,20 @@
                 method: 'get', 
                 type: 'json',     
                 success: function (response) {       
-                    phoneCode = response.results;  
+                    phoneCode = response.results; 
+                    console.log(phoneCode);
                     var input = document.querySelector("#phone");
                     window.intlTelInput(input, {                    
-                    formatOnDisplay: false,                   
-                    preferredCountries: [phoneCode],                    
-                });                  
+                        formatOnDisplay: false,                   
+                        preferredCountries: [phoneCode],                    
+                    });                  
+                },
+                error: function (params) {
+                    var input = document.querySelector("#phone");
+                    window.intlTelInput(input, {                    
+                        formatOnDisplay: false,                   
+                        preferredCountries: [phoneCode],                    
+                    });     
                 }
             });
             
@@ -245,10 +253,10 @@
                                 {
                                     swal({
                                         title: "Successfully registered!",  
-                                        text: "",                                               
+                                        text: "We have sent verification code to your email.Please verify your email.",                                               
                                         type: "success"
                                     }).then(function() {
-                                        var cur_url = window.location.href.replace('register', 'home');                       
+                                        var cur_url = window.location.href.replace('register', 'confirm');                       
                                         window.location.replace(cur_url);
                                     });
                                 }                                

@@ -157,4 +157,4 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'wanghuajinksh@gmail.com'
 EMAIL_HOST_PASSWORD = 'gtpzwarwxndzgzyl'
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'www.flickerface.com'
+DEFAULT_FROM_EMAIL = 'www.welcome.com'
