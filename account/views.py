@@ -144,13 +144,13 @@ def verify_resend(request):
     results = False
     try:        
         user = request.user
-        verified_code = str(random.randint(100000,999999))
+        verified_code = str(random.randint(1000,9999))
 
         
         user.verified_code = verified_code            
         user.save()            
-        send_code_email(user.email,verified_code) 
-        results = True
+        results = send_code_email(user.email,verified_code) 
+        
         
         return JsonResponse({'results':results,'which':'e','auth':True})
     except:
@@ -368,7 +368,7 @@ def check_register(request):
     results['which'] = which
     
         
-    verified_code = str(random.randint(100000,999999))
+    verified_code = str(random.randint(1000,9999))
     if is_phone > 0 or is_email > 0:
         return JsonResponse({'results':results})
     else:      
