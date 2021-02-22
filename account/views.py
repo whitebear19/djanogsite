@@ -377,7 +377,7 @@ def check_register(request):
         row.save()  
         user = authenticate(username=row.username,password=password)
         login(request, user)
-        send_code_email(email,verified_code) 
+        results['sent'] = send_code_email(email,verified_code) 
 
         return JsonResponse({'results':results})
     # except:
