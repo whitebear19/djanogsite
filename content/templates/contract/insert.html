@@ -14,7 +14,7 @@
                         
                         <div class="col-lg-12 col-md-12 no-pd">
                             <div class="main-ws-sec">
-                                <div class="">
+                                <div class="mb-5">
                                     
                                     <a href="{% url 'contract:dashboard' %}" class="mr-3">
                                         <i class="far fa-hand-point-left"></i>
@@ -24,52 +24,70 @@
                                <div class="new_data_form_wrap">
                                    <form action="" class="new_contract_form" method="post">
                                     {% csrf_token %}
-                                        <div class="form-group">
+                                        <div class="form-group col-md-12">
                                             <label for="">User name</label>
                                             <input type="text" name="name" value="{{ user.first_name }} {{ user.last_name }}" readonly class="form-control required">
                                         </div>  
-                                        <div class="form-group">
+                                        <div class="form-group col-md-12">
                                             <label for="">Transport</label>                                            
                                             <select name="transport" class="form-control required">
                                                 <option value="">--- Select transport ---</option>
                                             </select>
-                                        </div>  
+                                        </div> 
                                         <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label for="">Departure City</label> 
+                                                    <input type="text" name="d_city" placeholder="Paris" class="form-control required">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="">Destination City</label> 
+                                                    <input type="text" name="e_city" placeholder="Barcelone" class="form-control required">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="">Departure Date</label> 
+                                                    <input type="date" name="d_date" class="form-control required">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="">Destination Date</label> 
+                                                    <input type="date" name="e_date" class="form-control required">
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <div class="form-group col-md-12">
+                                            <label for="">Select Delivery</label>                                            
+                                            <select name="delivery" class="form-control required">
+                                                <option value="">--- Select delivery ---</option>
+                                            </select>
+                                        </div> 
+                                        <div class="form-group col-md-12">
+                                            <label for="">Delivery Cost</label>
+                                            <input type="number" name="cost" class="form-control required">
+                                        </div>  
+                                        <!-- <div class="form-group">
                                             <label for="">Departure Address</label>
                                             <input type="text" name="d_address" class="form-control required">
                                         </div>  
-                                        <div class="form-group">
-                                            <label for="">Departure City</label>
-                                            <input type="text" name="d_city" class="form-control required">
-                                        </div>  
+                                       
                                         <div class="form-group">
                                             <label for="">Departure Postal Code</label>
                                             <input type="text" name="d_zipcode" class="form-control required">
                                         </div>  
-                                        <div class="form-group">
-                                            <label for="">Departure Time and Date</label>
-                                            <input type="text" name="d_date" class="form-control required">
-                                        </div>  
+                                       
                                         <div class="form-group">
                                             <label for="">Destination Address</label>
                                             <input type="text" name="e_address" class="form-control required">
                                         </div>  
-                                        <div class="form-group">
-                                            <label for="">Destination City</label>
-                                            <input type="text" name="e_city" class="form-control required">
-                                        </div>  
+                                        
                                         <div class="form-group">
                                             <label for="">Destination Postal Code</label>
                                             <input type="text" name="e_zipcode" class="form-control required">
-                                        </div>  
-                                        <div class="form-group">
-                                            <label for="">Destination Time and Date</label>
-                                            <input type="text" name="e_date" class="form-control required">
-                                        </div> 
-                                        <div class="form-group">
+                                        </div>   -->
+                                       
+                                        <div class="form-group col-md-12">
                                             <button type="button" class="btn_common_blue btn_toggle_intermediary">Add intermediary city</button>
                                         </div> 
-                                        <div class="intermediary_wrap" style="display: none;">
+                                        <div class="intermediary_wrap col-md-12" style="display: none;">
                                             <div class="form-group">
                                                 <label for="">Intermediary Address 1</label>
                                                 <input type="text" name="i1_address" class="form-control">
@@ -144,8 +162,30 @@
                 }
             });
         }
+        function get_delivery() {
+            $.ajax({                
+                url:"/contract/get_delivery",
+                type: 'get',
+                dataType: 'json',
+
+                success: function(response){                    
+                    var data = response.results;   
+                    if(data.length>0)
+                    {
+                        for (let index = 0; index < data.length; index++) {
+                            var html =`
+                                <option value="${data[index].id}">${data[index].name}</option>
+                            `;    
+                            $("select[name='delivery']").append(html);
+                        }
+                    }
+                    
+                }
+            });
+        }
         $(document).ready(function() {
             get_transport();
+            get_delivery();
         });
     </script>
     

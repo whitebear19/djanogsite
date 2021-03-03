@@ -590,7 +590,7 @@ border: 3px solid #3f3f3f;
     padding: 0px 15px;
     border-radius: 2px;
 }
-.new_data_form
+.new_data_form , .new_delivery_form
 {
     margin-top: 20px;
     border: 1px solid #dedede;
@@ -631,7 +631,7 @@ border: 3px solid #3f3f3f;
   }
   
   /* Create a custom radio button */
-  .checkmark {
+  .radio_container .checkmark {
     position: absolute;
     top: 0;
     left: 0;
@@ -652,7 +652,7 @@ border: 3px solid #3f3f3f;
   }
   
   /* Create the indicator (the dot/circle - hidden when not checked) */
-  .checkmark:after {
+  .radio_container .checkmark:after {
     content: "";
     position: absolute;
     display: none;
@@ -672,6 +672,75 @@ border: 3px solid #3f3f3f;
     border-radius: 50%;
     background: white;
   }
+
+  /* --------------------------------------------- */
+  .check_container {
+    display: block;
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .check_container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .check_container .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: #eee;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .check_container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .check_container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .check_container .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .check_container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .check_container .checkmark:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  /* --------------------------------------------- */
   .followus_wrap
   {
       padding: 0px;
@@ -705,6 +774,17 @@ border: 3px solid #3f3f3f;
     .item-h-30
     {
         height: 30px;
+    }
+    .for_professional
+    {
+        display: none;
+    }
+    .wickedpicker
+    {
+        z-index: 9999;
+    }
+    .fontello-after:after, .fontello:before, .wickedpicker__controls__control-down:after, .wickedpicker__controls__control-up:before {
+        display: none!important;
     }
 /* ----------------------------------------------------- */
 

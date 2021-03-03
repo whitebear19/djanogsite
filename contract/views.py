@@ -33,7 +33,7 @@ from django.core.mail import send_mail,EmailMessage
 from django.template.loader import render_to_string, get_template
 from django.utils.html import strip_tags
 from .models import Contract
-from data.models import Data
+from data.models import Data,Delivery
 def dashboard(request):
     
     user = request.user 
@@ -61,6 +61,8 @@ def insert(request):
 def store(request):               
     name = request.POST.get('name')
     transport = request.POST.get('transport')
+    delivery = request.POST.get('delivery')
+    cost = request.POST.get('cost')
     d_address = request.POST.get('d_address')
     d_city = request.POST.get('d_city')
     d_zipcode = request.POST.get('d_zipcode')
@@ -82,6 +84,8 @@ def store(request):
         row = Contract(user_id=user.id,
                         c_num="",
                         transport=transport,
+                        delivery=delivery,
+                        cost=cost,
                         d_address=d_address,
                         d_city=d_city,
                         d_zipcode=d_zipcode,
@@ -119,6 +123,17 @@ def get_transport(request):
         results.append(data)
     return JsonResponse({'results':results})
 
+def get_delivery(request):
+    user = request.user
+    rows = Delivery.objects.filter(user_id=user.id)
+    results = []
+    for item in rows:
+        data = {}
+        data['id'] = item.id
+        data['name'] = item.name       
+        results.append(data)
+    return JsonResponse({'results':results})
+
 def get_contract(request):
     user = request.user
     rows = Contract.objects.filter(accepted='0')
@@ -136,6 +151,7 @@ def get_contract(request):
         data['id'] = item.id
         data['me'] = me
         data['c_num'] = item.c_num
+        data['cost'] = item.cost
         data['d_address'] = item.d_address       
         data['d_city'] = item.d_city  
         data['d_date'] = item.d_date
@@ -155,6 +171,15 @@ def get_contract(request):
         data['volume'] = volume
         username = CustomUser.objects.get(id=item.user_id).first_name + " " + CustomUser.objects.get(id=item.user_id).last_name
         data['username'] = username
+        if item.delivery:
+            try:
+                condition = int(item.delivery)
+                total_price = Delivery.objects.get(id=condition).price
+                data['total_price'] = int(total_price) + int(item.cost)
+            except:
+                data['total_price'] = item.cost
+        else:
+            data['total_price'] = item.cost
         results.append(data)
     return JsonResponse({'results':results})
 

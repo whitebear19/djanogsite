@@ -152,9 +152,9 @@ AUTHENTICATION_BACKENDS = ['account.backends.EmailBackend']
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(CONTENT_DIR,'media')
 
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.ionos.fr'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'wanghuajinksh@gmail.com'
-EMAIL_HOST_PASSWORD = 'gtpzwarwxndzgzyl'
+EMAIL_HOST_USER = 'contact@noustrans.com'
+EMAIL_HOST_PASSWORD = 'EmailD#123**'
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'www.welcome.com'
+DEFAULT_FROM_EMAIL = 'contact@noustrans.com'

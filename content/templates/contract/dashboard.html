@@ -33,6 +33,9 @@
                                                     Delivery Proposal Number
                                                 </td>
                                                 <td align="center">
+                                                    Cost
+                                                </td>
+                                                <td align="center">
                                                     Address
                                                 </td>
                                                 <td align="center">
@@ -76,163 +79,199 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">User name</label>
+                        <div class="wrap_accept">
+                            <div class="row item-h-30">
+                                <div class="col-md-4">
+                                    <label for="">User name</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_username"></label>
+                                </div>
                             </div>
-                            <div class="col-md-8">
-                                <label class="modal_username"></label>
+                            <div class="row item-h-30">
+                                <div class="col-md-4">
+                                    <label for="">Delivery Proposal Number</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_cnum"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30">
+                                <div class="col-md-4">
+                                    <label for="">Delivery Cost</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_cost"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30">
+                                <div class="col-md-4">
+                                    <label for="">Transport</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_transport"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30 daddress">
+                                <div class="col-md-4">
+                                    <label for="">Departure Address</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_d_address"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30">
+                                <div class="col-md-4">
+                                    <label for="">Departure City</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_d_city"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30 dzipcode">
+                                <div class="col-md-4">
+                                    <label for="">Departure Postal Code</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_d_zipcode"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30">
+                                <div class="col-md-4">
+                                    <label for="">Departure Time and Date</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_d_date"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30 eaddress">
+                                <div class="col-md-4">
+                                    <label for="">Destination Address</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_e_address"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30">
+                                <div class="col-md-4">
+                                    <label for="">Destination City</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_e_city"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30 ezipcode">
+                                <div class="col-md-4">
+                                    <label for="">Destination Postal Code</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_e_zipcode"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30">
+                                <div class="col-md-4">
+                                    <label for="">Destination Time and Date</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_e_date"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30 i1address">
+                                <div class="col-md-4">
+                                    <label for="">Intermediary Address 1</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_i1_address"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30 i1city">
+                                <div class="col-md-4">
+                                    <label for="">Intermediary City 1</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_i1_city"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30 i1zipcode">
+                                <div class="col-md-4">
+                                    <label for="">Intermediary Postal Code 1</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_i1_zipcode"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30 i1date">
+                                <div class="col-md-4">
+                                    <label for="">Intermediary Time and Date 1</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_i1_date"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30 i2address">
+                                <div class="col-md-4">
+                                    <label for="">Intermediary Address 2</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_i2_address"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30 i2city">
+                                <div class="col-md-4">
+                                    <label for="">Intermediary City 2</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_i2_city"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30 i2zipcode">
+                                <div class="col-md-4">
+                                    <label for="">Intermediary Postal Code 2</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_i2_zipcode"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30 i2date">
+                                <div class="col-md-4">
+                                    <label for="">Intermediary Time and Date 2</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="modal_i2_date"></label>
+                                </div>
+                            </div>
+                            <div class="row item-h-30">
+                                <div class="col-md-12 text-center">
+                                    <button data-id="" style="display: none;" class="text-center btn_accept_modal btn_common_blue">Accept</button>
+                                </div>
+                               
                             </div>
                         </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Delivery Proposal Number</label>
+                        <div class="wrap_confirm" style="display: none;">
+                            <div class="row mt-2">   
+                                <div class="col-md-12">
+                                    <label for="">Pick up address(Street N', City,Postal Code)</label>
+                                    <input type="text" class="form-control" name="">
+                                </div>   
                             </div>
-                            <div class="col-md-8">
-                                <label class="modal_cnum"></label>
+                            <div class="row mt-2">
+                                <div class="col-md-12">
+                                    <label for="">Pick up time</label>
+                                    <input type="text" class="form-control timepicker" name="timepicker">
+                                </div>                               
+                                
                             </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Transport</label>
+                            <div class="row mt-2">   
+                                <div class="col-md-12">
+                                    <label for="">Volume in M3</label>
+                                    <input type="text" class="form-control" name="">
+                                </div>   
                             </div>
-                            <div class="col-md-8">
-                                <label class="modal_transport"></label>
+                            <div class="row mt-2">
+                                <div class="col-md-12 text-center">
+                                    <button data-id="" class="text-center btn_accept btn_common_blue">Confirm</button>
+                                </div>                               
                             </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Departure Address</label>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="modal_d_address"></label>
-                            </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Departure City</label>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="modal_d_city"></label>
-                            </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Departure Postal Code</label>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="modal_d_zipcode"></label>
-                            </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Departure Time and Date</label>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="modal_d_date"></label>
-                            </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Destination Address</label>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="modal_e_address"></label>
-                            </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Destination City</label>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="modal_e_city"></label>
-                            </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Destination Postal Code</label>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="modal_e_zipcode"></label>
-                            </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Destination Time and Date</label>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="modal_e_date"></label>
-                            </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Intermediary Address 1</label>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="modal_i1_address"></label>
-                            </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Intermediary City 1</label>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="modal_i1_city"></label>
-                            </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Intermediary Postal Code 1</label>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="modal_i1_zipcode"></label>
-                            </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Intermediary Time and Date 1</label>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="modal_i1_date"></label>
-                            </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Intermediary Address 2</label>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="modal_i2_address"></label>
-                            </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Intermediary City 2</label>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="modal_i2_city"></label>
-                            </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Intermediary Postal Code 2</label>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="modal_i2_zipcode"></label>
-                            </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-4">
-                                <label for="">Intermediary Time and Date 2</label>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="modal_i2_date"></label>
-                            </div>
-                        </div>
-                        <div class="row item-h-30">
-                            <div class="col-md-12">
-                                <button data-id="" style="display: none;" class="text-center btn_accept btn_accept_modal btn_common_blue">Accept</button>
-                            </div>
-                           
                         </div>
                     </div>
                 </div>
@@ -258,9 +297,10 @@
                         for (let index = 0; index < data.length; index++) {
                             
                             var html = `
-                                <tr class="contract_item" data-id="${data[index].id}" data-me="${data[index].me}" data-username="${data[index].username}" data-cnum="${data[index].c_num}" data-volume="${data[index].volume}" data-daddress="${data[index].d_address}" data-dcity="${data[index].d_city}" data-dzipcode="${data[index].d_zipcode}" data-ddate="${data[index].d_date}" data-eaddress="${data[index].e_address}" data-ecity="${data[index].e_city}" data-ezipcode="${data[index].e_zipcode}" data-edate="${data[index].e_date}" data-i1address="${data[index].i1_address}" data-i1city="${data[index].i1_city}" data-i1zipcode="${data[index].i1_zipcode}" data-i1date="${data[index].i1_date}" data-i2address="${data[index].i2_address}" data-i2city="${data[index].i2_city}" data-i2zipcode="${data[index].i2_zipcode}" data-i2date="${data[index].i2_date}">
+                                <tr>
                                     <td>${index+1}</td>
-                                    <td>${data[index].c_num}</td>
+                                    <td class="contract_item" data-id="${data[index].id}" data-me="${data[index].me}" data-username="${data[index].username}" data-cnum="${data[index].c_num}" data-cost="${data[index].cost}" data-price="${data[index].total_price}" data-volume="${data[index].volume}" data-daddress="${data[index].d_address}" data-dcity="${data[index].d_city}" data-dzipcode="${data[index].d_zipcode}" data-ddate="${data[index].d_date}" data-eaddress="${data[index].e_address}" data-ecity="${data[index].e_city}" data-ezipcode="${data[index].e_zipcode}" data-edate="${data[index].e_date}" data-i1address="${data[index].i1_address}" data-i1city="${data[index].i1_city}" data-i1zipcode="${data[index].i1_zipcode}" data-i1date="${data[index].i1_date}" data-i2address="${data[index].i2_address}" data-i2city="${data[index].i2_city}" data-i2zipcode="${data[index].i2_zipcode}" data-i2date="${data[index].i2_date}">${data[index].c_num}</td>
+                                    <td>${data[index].cost}</td>
                                     <td>${data[index].d_address}</td>
                                     <td>${data[index].d_city}</td>
                                     <td>${data[index].d_date}</td>
@@ -269,7 +309,7 @@
                                     if(data[index].me == "0")
                                     {
                                         html +=`
-                                            <button data-id="${data[index].id}" class="btn_accept btn_common_blue">Accept</button>
+                                            <button data-id="${data[index].id}" data-me="${data[index].me}" data-username="${data[index].username}" data-cnum="${data[index].c_num}" data-cost="${data[index].cost}" data-price="${data[index].total_price}" data-volume="${data[index].volume}" data-daddress="${data[index].d_address}" data-dcity="${data[index].d_city}" data-dzipcode="${data[index].d_zipcode}" data-ddate="${data[index].d_date}" data-eaddress="${data[index].e_address}" data-ecity="${data[index].e_city}" data-ezipcode="${data[index].e_zipcode}" data-edate="${data[index].e_date}" data-i1address="${data[index].i1_address}" data-i1city="${data[index].i1_city}" data-i1zipcode="${data[index].i1_zipcode}" data-i1date="${data[index].i1_date}" data-i2address="${data[index].i2_address}" data-i2city="${data[index].i2_city}" data-i2zipcode="${data[index].i2_zipcode}" data-i2date="${data[index].i2_date}" class="contract_item btn_common_blue">Accept</button>
                                         `;
                                     }
                                                                                
@@ -287,36 +327,154 @@
         }
         $(document).ready(function(){
             get_contract();
+            $('.timepicker').wickedpicker();
+            $(".wickedpicker__controls__control-up").html('<svg aria-hidden="true" style="width:15px;height:15px;" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-chevron-up fa-w-14 fa-3x"><path fill="currentColor" d="M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z" class=""></path></svg>');
+            $(".wickedpicker__controls__control-down").html('<svg aria-hidden="true" style="width:15px;height:15px;" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-chevron-down fa-w-14 fa-3x"><path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" class=""></path></svg>');
+            
             $(document).on('click','.contract_item',function(){
                 var id = $(this).data('id');
                 $(".modal_transport").html($(this).data('volume'));
                 $(".modal_username").html($(this).data('username'));
                 $(".modal_cnum").html($(this).data('cnum'));
-                $(".modal_d_address").html($(this).data('daddress'));
-                $(".modal_e_address").html($(this).data('eaddress'));
-                $(".modal_i1_address").html($(this).data('i1address'));
-                $(".modal_i2_address").html($(this).data('i2address'));
-                $(".modal_d_zipcode").html($(this).data('dzipcode'));
-                $(".modal_e_zipcode").html($(this).data('ezipcode'));
-                $(".modal_i1_zipcode").html($(this).data('i1zipcode'));
-                $(".modal_i2_zipcode").html($(this).data('i2zipcode'));
+                $(".modal_cost").html($(this).data('price'));                
+                
+                $(".modal_e_zipcode").html($(this).data('ezipcode'));                
+                
                 $(".modal_d_city").html($(this).data('dcity'));
-                $(".modal_e_city").html($(this).data('ecity'));
-                $(".modal_i1_city").html($(this).data('i1city'));
-                $(".modal_i2_city").html($(this).data('i2city'));
+                $(".modal_e_city").html($(this).data('ecity'));                
+                
                 $(".modal_d_date").html($(this).data('ddate'));
                 $(".modal_e_date").html($(this).data('edate'));
-                $(".modal_i1_date").html($(this).data('i1date'));
-                $(".modal_i2_date").html($(this).data('i2date'));
-                var me = $(this).data('me');
-                if(me == "0")
+                
+                if($(this).data('dzipcode'))
                 {
-                    $(".btn_accept_modal").attr("data-id",id);
-                    $(".btn_accept_modal").css("display","block");
+                    $(".dzipcode").css("display","block");
+                    $(".modal_d_zipcode").html($(this).data('dzipcode'));
                 }
                 else
                 {
-                    $(".btn_accept_modal").attr("data-id","");
+                    $(".dzipcode").css("display","none");
+                }
+
+                if($(this).data('ezipcode'))
+                {
+                    $(".ezipcode").css("display","block");
+                    $(".modal_e_zipcode").html($(this).data('ezipcode'));
+                }
+                else
+                {
+                    $(".ezipcode").css("display","none");
+                }
+                
+                if($(this).data('daddress'))
+                {
+                    $(".daddress").css("display","block");
+                    $(".modal_d_address").html($(this).data('daddress'));
+                }
+                else
+                {
+                    $(".daddress").css("display","none");
+                }
+
+                if($(this).data('eaddress'))
+                {
+                    $(".daddress").css("display","block");
+                    $(".modal_e_address").html($(this).data('eaddress'));
+                }
+                else
+                {
+                    $(".eaddress").css("display","none");
+                }
+
+                if($(this).data('i1address'))
+                {
+                    $(".i1address").css("display","block");
+                    $(".modal_i1_address").html($(this).data('i1address'));
+                }
+                else
+                {
+                    $(".i1address").css("display","none");
+                }
+
+                if($(this).data('i1city'))
+                {
+                    $(".i1city").css("display","block");
+                    $(".modal_i1_city").html($(this).data('i1city'));
+                }
+                else
+                {
+                    $(".i1city").css("display","none");
+                }
+
+                if($(this).data('i1zipcode'))
+                {
+                    $(".i1zipcode").css("display","block");
+                    $(".modal_i1_zipcode").html($(this).data('i1zipcode'));
+                }
+                else
+                {
+                    $(".i1zipcode").css("display","none");
+                }
+
+                if($(this).data('i1date'))
+                {
+                    $(".i1date").css("display","block");
+                    $(".modal_i1_date").html($(this).data('i1date'));
+                }
+                else
+                {
+                    $(".i1date").css("display","none");
+                }
+
+                if($(this).data('i2address'))
+                {
+                    $(".i2address").css("display","block");
+                    $(".modal_i2_address").html($(this).data('i2address'));
+                }
+                else
+                {
+                    $(".i2address").css("display","none");
+                }
+
+                if($(this).data('i2city'))
+                {
+                    $(".i2city").css("display","block");
+                    $(".modal_i2_city").html($(this).data('i2city'));
+                }
+                else
+                {
+                    $(".i2city").css("display","none");
+                }
+
+                if($(this).data('i2zipcode'))
+                {
+                    $(".i2zipcode").css("display","block");
+                    $(".modal_i2_zipcode").html($(this).data('i2zipcode'));
+                }
+                else
+                {
+                    $(".i2zipcode").css("display","none");
+                }
+
+                if($(this).data('i2date'))
+                {
+                    $(".i2date").css("display","block");
+                    $(".modal_i2_date").html($(this).data('i2date'));
+                }
+                else
+                {
+                    $(".i2date").css("display","none");
+                }
+
+                var me = $(this).data('me');
+                if(me == "0")
+                {
+                    $(".btn_accept").attr("data-id",id);
+                    $(".btn_accept_modal").css("display","inline-block");
+                }
+                else
+                {
+                    $(".btn_accept").attr("data-id","");
                     $(".btn_accept_modal").css("display","none");
                 }
                 

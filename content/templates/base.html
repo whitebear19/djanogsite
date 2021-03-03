@@ -23,8 +23,10 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
    <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
    <link rel="stylesheet" type="text/css" href="{% static 'css/datatables.min.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'css/wickedpicker.min.css' %}">
    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
    <script type="text/javascript" src="{% static 'js/datatables.min.js' %}"></script> 
+   <script type="text/javascript" src="{% static 'js/wickedpicker.min.js' %}"></script> 
    
 </head>
 
@@ -894,13 +896,13 @@
       $(document).ready(function(){
          page_init();
        
-         setInterval(function(){                 
-            get_new_message_global();               
-            get_new_message();
-            get_all_room();
+         // setInterval(function(){                 
+         //    get_new_message_global();               
+         //    get_new_message();
+         //    get_all_room();
             
             
-         }, 2000);
+         // }, 2000);
          $('.send_message_global').keypress(function(event){
              var keycode = (event.keyCode ? event.keyCode : event.which);
              if(keycode == '13'){

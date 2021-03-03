@@ -147,6 +147,54 @@ jQuery(function ($) {
         }            
     });
 
+    $(document).on('click','.btn_store_delivery',function(){
+        var is_checked = true;
+        $('.new_delivery_form .required').each(function(){
+            if($(this).val()=="")
+            {
+                $(this).addClass('alert-border');
+                is_checked = false;
+            }
+        });     
+       
+        if(is_checked)
+        {
+            var data = $('.new_delivery_form').serialize();
+            $("#loading").css("display","block");
+            $.ajax({                
+                url:"/data/store_delivery",
+                type: 'post',
+                dataType: 'json',
+                data: data,
+
+                success: function(result){                    
+                    $("#loading").css("display","none");
+                    var data = result.response;
+                    if(data)
+                    {                            
+                        swal({
+                            title: "Successfully stored!",                     
+                            type: "success"
+                        }).then(function() {
+                            location.reload();
+                        });
+                    }
+                    else
+                    {
+                        swal({
+                            title: "Something wrong!",                     
+                            text: "Please try again",
+                            type: "error"
+                        }).then(function() {
+                            location.reload();
+                        });
+                    }
+                    
+                
+                }
+            });
+        }            
+    });
     // ---------------------------Contract Part---------------------------------
     
     $(document).on('click','.btn_store_contract',function(){
@@ -243,6 +291,12 @@ jQuery(function ($) {
                 });
             }
         });
+    });
+    
+    $(document).on('click','.btn_accept_modal',function()
+    {     
+        $(".wrap_accept").css("display","none");
+        $(".wrap_confirm").css("display","block");        
     });
     
 });

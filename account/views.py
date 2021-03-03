@@ -134,7 +134,7 @@ def send_code_email(email,code):
         subject = 'Email Verify Code' 
         html_message = render_to_string('email/verify.html', {'code': code})
         plain_message = strip_tags(html_message)
-        from_email = 'welcome.com'
+        from_email = 'contact@noustrans.com'
         send_mail(subject, plain_message, from_email, [email], html_message=html_message) 
         return True
     except:
@@ -291,11 +291,12 @@ def get_phoneCode(request):
     geo_info = get_geolocation_for_ip(ipaddress)
     results=json.dumps(geo_info) 
     results=json.loads(results)
+
     if results['country_code']:
         code = results['country_code']
     else:
         code = 'fr'
-    return JsonResponse({'results':code})
+    return JsonResponse({'results':code,'data':results})
 
 def check_login(request):
     email = request.POST.get('email').replace(" ", "")
@@ -338,50 +339,50 @@ def check_login(request):
             return JsonResponse({'results':results}) 
 
 def check_register(request):    
-    # try:
-    firstname = request.POST.get('firstname').replace(" ", "")
-    lastname = request.POST.get('lastname').replace(" ", "")
-    email = request.POST.get('email').replace(" ", "")
-    phone = request.POST.get('phone').replace(" ", "")
-    phonecode = request.POST.get('phonecode')
-    
-    password = request.POST.get('password1')
-
-    professional = request.POST.get('professional')
-    address = request.POST.get('address')
-    city = request.POST.get('city')
-    zipcode = request.POST.get('zipcode')
-    company = request.POST.get('company')
-    tel_fix = request.POST.get('tel_fix')
-    siret = request.POST.get('siret')
-    which = request.POST.get('which')
-    if which == 'phone':
-        is_phone = CustomUser.objects.filter(phone=phone).count()
-        is_email = 0
-    else:
-        is_phone = 0
-        is_email = CustomUser.objects.filter(email=email).count()
-
-    results = {}
-    results['is_phone'] = is_phone
-    results['is_email'] = is_email
-    results['which'] = which
-    
+    try:
+        firstname = request.POST.get('firstname').replace(" ", "")
+        lastname = request.POST.get('lastname').replace(" ", "")
+        email = request.POST.get('email').replace(" ", "")
+        phone = request.POST.get('phone').replace(" ", "")
+        phonecode = request.POST.get('phonecode')
         
-    verified_code = str(random.randint(1000,9999))
-    if is_phone > 0 or is_email > 0:
-        return JsonResponse({'results':results})
-    else:      
-        
-        row = CustomUser(password=make_password(password),username=datetime.datetime.now().strftime("%m%d%Y%H%M%S"),is_superuser=0,is_staff=0,is_active=1,first_name=firstname,last_name=lastname,email=email,phone=phone,phone_code=phonecode,professional=professional,address=address,city=city,zipcode=zipcode,company=company,tel_fix=tel_fix,siret=siret)
-        row.save()  
-        user = authenticate(username=row.username,password=password)
-        login(request, user)
-        results['sent'] = send_code_email(email,verified_code) 
+        password = request.POST.get('password1')
 
-        return JsonResponse({'results':results})
-    # except:
-    #     return JsonResponse({'results':False})
+        professional = request.POST.get('professional')
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        zipcode = request.POST.get('zipcode')
+        company = request.POST.get('company')
+        tel_fix = request.POST.get('tel_fix')
+        siret = request.POST.get('siret')
+        which = request.POST.get('which')
+        if which == 'phone':
+            is_phone = CustomUser.objects.filter(phone=phone).count()
+            is_email = 0
+        else:
+            is_phone = 0
+            is_email = CustomUser.objects.filter(email=email).count()
+
+        results = {}
+        results['is_phone'] = is_phone
+        results['is_email'] = is_email
+        results['which'] = which
+        
+            
+        verified_code = str(random.randint(1000,9999))
+        if is_phone > 0 or is_email > 0:
+            return JsonResponse({'results':results})
+        else:      
+            
+            row = CustomUser(password=make_password(password),username=datetime.datetime.now().strftime("%m%d%Y%H%M%S"),is_superuser=0,is_staff=0,is_active=1,first_name=firstname,last_name=lastname,email=email,phone=phone,phone_code=phonecode,professional=professional,address=address,city=city,zipcode=zipcode,company=company,tel_fix=tel_fix,siret=siret,verified_code=verified_code)
+            row.save()  
+            user = authenticate(username=row.username,password=password)
+            login(request, user)
+            results['sent'] = send_code_email(email,verified_code) 
+
+            return JsonResponse({'results':results})
+    except:
+        return JsonResponse({'results':False})
 
 
 def close_account(request):

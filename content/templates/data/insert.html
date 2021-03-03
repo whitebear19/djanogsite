@@ -41,10 +41,31 @@
                                                 Submit
                                             </button>
                                         </div>
-                                   </form>                                   
-                                    
+                                   </form>  
                                </div>
                                
+                               <div class="new_data_form_wrap">
+                                    <form action="" class="new_delivery_form" method="post">
+                                    {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="">Option name</label>
+                                            <input type="text" name="delivery_name" class="form-control required">
+                                        </div>  
+                                        <div class="form-group">
+                                            <label for="">Option description</label>
+                                            <input type="text" name="delivery_description" class="form-control required">
+                                        </div>  
+                                        <div class="form-group">
+                                            <label for="">Option price in EUR</label>
+                                            <input type="number" name="delivery_price" value="" class="form-control required">
+                                        </div>  
+                                        <div class="form-group text-center">
+                                            <button type="button" class="btn_store_delivery btn_common_blue">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </form>  
+                                </div>
                             </div>                            
                         </div>
                          

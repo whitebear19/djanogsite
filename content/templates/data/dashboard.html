@@ -20,6 +20,9 @@
                                         <i class="far fa-plus-square"></i>
                                     </a>
                                 </div>
+                                <div class="mt-5">
+                                    <label for="">Transport Data</label>
+                                </div>
                                 <div class="mt-2">
                                     <table id="data_result" class="data_result table">
                                         <thead>
@@ -43,7 +46,32 @@
                                         </tbody>
                                     </table>
                                 </div>
-                               
+                                <div class="mt-5">
+                                    <label for="">Delivery Data</label>
+                                </div>
+                                <div class="mt-2">
+                                    <table id="delivery_result" class="data_result table">
+                                        <thead>
+                                            <tr>
+                                                <td style="width:20px;" align="center">
+                                                    No
+                                                </td>
+                                                <td align="center">
+                                                    Name
+                                                </td>
+                                                <td align="center">
+                                                    Description
+                                                </td>
+                                                <td align="center">
+                                                    Price
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="delivery_result_row">
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>                            
                         </div>
                          
@@ -87,8 +115,42 @@
                 }
             });
         }
+        function get_delivery()
+        {
+            $("#loading").css("display","flex");
+            $.ajax({                
+                url:"/data/get_delivery",
+                type: 'get',
+                dataType: 'json',                
+
+                success: function(result){                    
+                    $("#loading").css("display","none");
+                    var data = result.response;
+                    $(".delivery_result_row").html("");
+                    if(data.length > 0)
+                    {
+                        for (let index = 0; index < data.length; index++) {
+                            
+                            var html = `
+                                <tr>
+                                    <td>${index+1}</td>
+                                    <td>${data[index].name}</td>
+                                    <td>${data[index].volume}</td>
+                                    <td>${data[index].available}</td>
+                                </tr>
+                            `;
+
+                            $(".delivery_result_row").append(html);
+                        }
+                        
+                    }  
+                    $('#delivery_result').DataTable();     
+                }
+            });
+        }
         $(document).ready(function(){
             get_data();
+            get_delivery();
         });
     </script>
     

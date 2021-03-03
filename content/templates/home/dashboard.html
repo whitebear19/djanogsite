@@ -48,9 +48,109 @@
                 </div>
             </div>
         </div>
+        <div class="main-section mt-2">
+            <div class="container">
+                <div class="main-section-data">
+                    <div class="row">
+                        
+                        <div class="col-lg-12 col-md-12 no-pd">
+                            <div class="main-ws-sec">                               
+                                <div class="mt-2">
+                                    <table id="data_result" class="data_result table">
+                                        <thead>
+                                            <tr>
+                                                <td style="width:20px;" align="center">
+                                                    No
+                                                </td>
+                                                <td align="center">
+                                                    Delivery Proposal Number
+                                                </td>
+                                                <td align="center">
+                                                    Cost
+                                                </td>
+                                                <td align="center">
+                                                    Address
+                                                </td>
+                                                <td align="center">
+                                                    City
+                                                </td>
+                                                <td align="center">
+                                                    Date
+                                                </td>
+                                                <td align="center">
+                                                    Volume
+                                                </td>
+                                                <td align="center">
+                                                    Action
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="data_result_row">
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                               
+                            </div>                            
+                        </div>
+                         
+                    </div>                       
+                </div>
+            </div>
+        </div>
     </main>
 
-    
+    <script>
+        function get_contract()
+        {
+            $("#loading").css("display","flex");
+            $.ajax({                
+                url:"/contract/get_contract",
+                type: 'get',
+                dataType: 'json',                
+
+                success: function(result){                    
+                    $("#loading").css("display","none");
+                    var data = result.results;
+                    console.log(data);
+                    $(".data_result_row").html("");
+                    if(data.length > 0)
+                    {
+                        for (let index = 0; index < data.length; index++) {
+                            
+                            var html = `
+                                <tr>
+                                    <td>${index+1}</td>
+                                    <td class="contract_item" data-id="${data[index].id}" data-me="${data[index].me}" data-username="${data[index].username}" data-cnum="${data[index].c_num}" data-cost="${data[index].cost}" data-volume="${data[index].volume}" data-daddress="${data[index].d_address}" data-dcity="${data[index].d_city}" data-dzipcode="${data[index].d_zipcode}" data-ddate="${data[index].d_date}" data-eaddress="${data[index].e_address}" data-ecity="${data[index].e_city}" data-ezipcode="${data[index].e_zipcode}" data-edate="${data[index].e_date}" data-i1address="${data[index].i1_address}" data-i1city="${data[index].i1_city}" data-i1zipcode="${data[index].i1_zipcode}" data-i1date="${data[index].i1_date}" data-i2address="${data[index].i2_address}" data-i2city="${data[index].i2_city}" data-i2zipcode="${data[index].i2_zipcode}" data-i2date="${data[index].i2_date}">${data[index].c_num}</td>
+                                    <td>${data[index].cost}</td>
+                                    <td>${data[index].d_address}</td>
+                                    <td>${data[index].d_city}</td>
+                                    <td>${data[index].d_date}</td>
+                                    <td>${data[index].volume}</td>
+                                    <td>`;
+                                    if(data[index].me == "0")
+                                    {
+                                        html +=`
+                                            <button data-id="${data[index].id}" class="btn_accept btn_common_blue">Accept</button>
+                                        `;
+                                    }
+                                                                               
+                            html +=`</td>
+                                </tr>
+                            `;
+
+                            $(".data_result_row").append(html);
+                        }
+                        
+                    }  
+                    $('#data_result').DataTable();     
+                }
+            });
+        }
+        $(document).ready(function(){
+            get_contract();
+        });
+    </script>
     
 
 {% endblock %}

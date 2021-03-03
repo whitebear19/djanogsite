@@ -5,6 +5,8 @@ class Contract(models.Model):
     user_id = models.CharField(max_length=50,default='',null=True)    
     c_num = models.CharField(max_length=50,default='',null=True)    
     transport = models.CharField(max_length=50,default='',null=True)    
+    delivery = models.CharField(max_length=50,default='',null=True)    
+    cost = models.CharField(max_length=50,default='',null=True)    
     d_address = models.CharField(max_length=50,default='',null=True)    
     d_city = models.CharField(max_length=50,default='',null=True)    
     d_zipcode = models.CharField(max_length=50,default='',null=True)    

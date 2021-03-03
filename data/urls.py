@@ -11,5 +11,9 @@ urlpatterns = [
    
     # ajax
     path('store',view=views.store, name='store'),
+    path('store_delivery',view=views.store_delivery, name='store_delivery'),
+    
     path('get_data',view=views.get_data, name='get_data'),
+    path('get_delivery',view=views.get_delivery, name='get_delivery'),
+    
 ]

@@ -20,7 +20,7 @@ from django.urls import reverse_lazy
 
 from account.models import CustomUser
 
-from .models import Data
+from .models import Data,Delivery
 import datetime
 from datetime import timedelta
 import random
@@ -66,6 +66,18 @@ def store(request):
     except:
         return JsonResponse({'response':False})
 
+def store_delivery(request):               
+    name = request.POST.get('delivery_name')
+    description = request.POST.get('delivery_description')
+    price = request.POST.get('delivery_price')
+    try:
+        user = request.user
+        row = Delivery(name=name,description=description,price=price,user_id=user.id)
+        row.save()
+        return JsonResponse({'response':True})
+    except:
+        return JsonResponse({'response':False})
+
 def get_data(request):
 
     results = []      
@@ -77,6 +89,21 @@ def get_data(request):
             data['name'] = item.name
             data['volume'] = item.volume
             data['available'] = item.available
+            results.append(data)
+        return JsonResponse({'response':results})
+    except:
+        return JsonResponse({'response':results})
+
+def get_delivery(request):
+    results = []     
+
+    try:
+        datatemp = Delivery.objects.all()
+        for item in datatemp:
+            data = {}
+            data['name'] = item.name
+            data['description'] = item.description
+            data['price'] = item.price
             results.append(data)
         return JsonResponse({'response':results})
     except:
